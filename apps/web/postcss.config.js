@@ -1,0 +1,1 @@
+module.exports = require("@kshitij/configs/tailwind/postcss.config");

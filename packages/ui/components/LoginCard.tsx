@@ -1,9 +1,5 @@
 import { Button } from "./Button";
-
-interface LoginCardProps {
-  page: string;
-  name?: string;
-}
+import { LoginCardProps } from "types";
 
 export const LoginCard = ({ page , name }: LoginCardProps) => {
     return (

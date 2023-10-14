@@ -1,20 +1,13 @@
 "use client"
-import { Button } from "ui";
+import { Button , ProductCard } from "ui";
 import "ui/styles.css";
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from "react";
-
-interface Product {
-  id: number;
-  title: string;
-  price: string;
-  imageURL: string;
-  published: Boolean;
-}
+import { ProductType } from "types";
 
 export default function Page(): JSX.Element {
   const router = useRouter() ;
-  const [products , setProducts] = useState<Product[]>([]) ;
+  const [products , setProducts] = useState<ProductType[]>([]) ;
 
   useEffect(() => { 
      const fetchProducts = async() => {
@@ -37,11 +30,7 @@ export default function Page(): JSX.Element {
         </div>
       </div>
       <div className="mt-10">
-        <ul>
-          { products.map((product) => <li>
-            {product.title} {product.price}
-          </li>)}
-        </ul>
+          { products.map((product) => <ProductCard {...product}/>)}
       </div>
     </main>
   );

@@ -8,6 +8,9 @@
     "lint": "eslint .",
     "generate:component": "turbo gen react-component"
   },
+  "dependencies": {
+    "types": "*"
+  },
   "devDependencies": {
     "@turbo/gen": "^1.10.12",
     "@types/node": "^20.5.2",

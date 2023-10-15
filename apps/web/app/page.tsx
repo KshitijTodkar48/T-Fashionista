@@ -1,5 +1,5 @@
 "use client"
-import { Button , ProductCard } from "ui";
+import { Button , Hero, ProductCard } from "ui";
 import "ui/styles.css";
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from "react";
@@ -19,17 +19,9 @@ export default function Page(): JSX.Element {
    } , [])
 
   return (
-    <main className="flex flex-col h-screen justify-center items-center text-5xl font-bold">
-      <div className="flex flex-col gap-8">
-        <h1>
-          Welcome to <span className="text-orange-500"> T-Fashionista </span>
-        </h1>
-        <div className="flex gap-4 justify-evenly font-semibold">
-          <div onClick={() => {router.push('/users/login')}}><Button name="Login"/></div>
-          <div onClick={() => {router.push('/users/signup')}}><Button name="Signup"/></div>
-        </div>
-      </div>
-      <div className="mt-10">
+    <main className="flex flex-col items-center">
+      <Hero />
+      <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           { products.map((product) => <ProductCard {...product}/>)}
       </div>
     </main>

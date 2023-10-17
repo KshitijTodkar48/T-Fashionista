@@ -3,7 +3,7 @@ import { AddButton } from "./AddButton"
 
 export const ProductCard = ({ imageURL , title , price } : ProductType) => {
   return (
-    <section className="border p-5 m-2">
+    <section className="border p-5 m-2 shadow-lg">
         <div>
             <img src={imageURL} alt="T-shirt image"
             className="h-[250px] w-[250px]" />

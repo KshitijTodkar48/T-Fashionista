@@ -22,7 +22,7 @@ export default function Page(): JSX.Element {
     <main className="flex flex-col items-center">
       <Hero />
       <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          { products.map((product) => <ProductCard {...product}/>)}
+          { products.map((product) => <div key={product.id}> <ProductCard {...product}/> </div>)}
       </div>
     </main>
   );

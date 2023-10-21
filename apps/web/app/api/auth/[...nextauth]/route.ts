@@ -10,22 +10,41 @@ export const authOptions = {
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-              username: { label: "Username", type: "text", placeholder: "jsmith" },
+              email: { label: "Email", type: "text", placeholder: "jsmith@example.com" },
               password: { label: "Password", type: "password" }
             },
+            
+            // @ts-ignore
             async authorize(credentials, req) {
-              // Add logic here to look up the user from the credentials supplied
-              const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
-        
-              if (user) {
-                // Any object returned will be saved in `user` property of the JWT
-                return user
-              } else {
-                // If you return null then an error will be displayed advising the user to check their details.
-                return null
-        
-                // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+            // Logic to look up the user from the credentials supplied.
+              if(!credentials?.email || !credentials.password)
+              {
+                return null ;
               }
+
+              // Check if user with this email exists.
+              const user = await prisma.user.findUnique({
+                where: {
+                  email: credentials.email
+                }
+              })
+
+              // If user does not exist.
+              if(!user) {
+                return null ;
+              }
+
+              // If user exists, match the passwords.
+              const passwordsMatch = await bcrypt.compare(credentials.password , user.hashedPassword);
+
+              if(!passwordsMatch)
+              { 
+                // Passwords do not match.
+                return null ;
+              }
+
+              // return the user object if everything is valid.
+              return user;
             }
           })
     ],

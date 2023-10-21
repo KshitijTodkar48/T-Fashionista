@@ -9,6 +9,7 @@
     "generate:component": "turbo gen react-component"
   },
   "dependencies": {
+    "next-auth": "^4.24.3",
     "types": "*"
   },
   "devDependencies": {

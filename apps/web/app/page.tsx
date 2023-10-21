@@ -1,14 +1,14 @@
 "use client"
 import { Button , Hero, ProductCard } from "ui";
 import "ui/styles.css";
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { ProductType } from "types";
 
 export default function Page(): JSX.Element {
-  const router = useRouter() ;
   const [products , setProducts] = useState<ProductType[]>([]) ;
-
+  const { data:session } = useSession() ;
+  //console.log(session) ;
   useEffect(() => { 
      const fetchProducts = async() => {
        const response = await fetch("/api/products") ;

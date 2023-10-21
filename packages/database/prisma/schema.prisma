@@ -66,6 +66,7 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  hashedPassword String
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -78,6 +79,7 @@ model Admin {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  hashedPassword String
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt

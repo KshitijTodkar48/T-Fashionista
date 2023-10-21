@@ -1,7 +1,4 @@
-type ButtonProps = {
-    name: string;
-    type: "button" | "submit" | "reset" | undefined;
-}
+import { ButtonProps } from "types"
 
 export const Button = ({ name , type } : ButtonProps) => {
     return(

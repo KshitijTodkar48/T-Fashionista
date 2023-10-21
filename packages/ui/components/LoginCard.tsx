@@ -5,7 +5,7 @@ import { LoginCardProps } from "types";
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 
-export const LoginCard = ({ page , name , handleSubmit}: LoginCardProps) => {
+export const LoginCard = ({ page , name }: LoginCardProps) => {
 
   const [email,setEmail] = useState<string>("");
   const [password,setPassword] = useState<string>("");
@@ -15,8 +15,26 @@ export const LoginCard = ({ page , name , handleSubmit}: LoginCardProps) => {
     e.preventDefault();
     if(page === "Signup")
     { // Signup
-      handleSubmit && handleSubmit(email,password);
-      router.push("/users/login");
+        const response = await fetch("/api/users/signup",{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email,
+            password
+          })
+        })
+        try {
+          if (response.ok) {
+            router.push("/users/login");
+          } else {
+            alert("User with this email already exists.");
+          }
+        } catch (error) {
+          // Handle network or unexpected errors.
+          console.error("An error occurred during the fetch:", error);
+        }
     }
     else{ // Login
         const response = await signIn("credentials", {
@@ -24,11 +42,16 @@ export const LoginCard = ({ page , name , handleSubmit}: LoginCardProps) => {
             password,
             redirect: false
           })
-      if(response?.ok)
-        router.push("/");
-      else{
-        alert("Invalid username or password.");
-      }
+        try {
+          if(response?.ok)
+            router.push("/");
+          else{
+            alert("Invalid username or password.");
+          }
+        } catch (error) {
+          // Handle network or unexpected errors.
+          console.error("An error occurred during the fetch:", error);
+        }
     }
   }
 

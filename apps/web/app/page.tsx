@@ -1,5 +1,5 @@
 "use client"
-import { Button , Hero, ProductCard } from "ui";
+import { Button , Hero , Navbar , ProductCard } from "ui";
 import "ui/styles.css";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -20,7 +20,10 @@ export default function Page(): JSX.Element {
 
   return (
     <main className="flex flex-col items-center">
-      <Hero />
+      <Navbar />
+      <div className="mt-[75px]">
+        <Hero />
+      </div>
       <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           { products.map((product) => <div key={product.id}> <ProductCard {...product}/> </div>)}
       </div>

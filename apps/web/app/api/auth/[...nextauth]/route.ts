@@ -15,7 +15,7 @@ export const authOptions = {
             },
             
             // @ts-ignore
-            async authorize(credentials, req) {
+            async authorize(credentials) {
             // Logic to look up the user from the credentials supplied.
               if(!credentials?.email || !credentials.password)
               {

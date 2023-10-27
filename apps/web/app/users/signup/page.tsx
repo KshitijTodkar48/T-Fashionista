@@ -1,4 +1,5 @@
 import "ui/styles.css";
+import "ui/styles.css";
 import { LoginCard } from "ui";
 
 const SignupPage = () => {

@@ -1,17 +1,57 @@
 import { ProductType } from "types"
-import { AddButton } from "./AddButton"
+import { OrangeButton } from "./OrangeButton"
+import { StarIcon } from "../assets" 
 
-export const ProductCard = ({ imageURL , title , price } : ProductType) => {
+export const ProductCard = ({ imageURL , title , rating , price , id , userId } : ProductType) => {
+
+  const addToCart = async (productId: Number, userId: string) => {
+    const response = await fetch(`/api/products/addToCart`,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        productId,
+        userId
+      })
+    })
+    try {
+      if(response.ok)
+      {
+        alert("Item added to cart.")
+      }
+      else{
+        alert("Item already added to cart.")
+      }
+    } catch (error) {
+      console.log(error);
+      alert("An error occured.")
+    }
+  }
   return (
     <section className="border p-5 m-2 shadow-lg">
         <div>
             <img src={imageURL} alt="T-shirt image"
             className="h-[250px] w-[250px]" />
         </div>
-        <h1 className="font-semibold text-lg text-gray-500 text-center m-2">{title}</h1>
-        <h2 className="font-bold text-center">{price}</h2>
-        <div className="flex justify-center mt-2">
-          <AddButton/>
+        <h1 className="font-semibold text-lg text-gray-600 text-center m-2">{title}</h1>
+        <div className="flex justify-center m-2">
+           <StarIcon />
+           <span className="text-gray-500 mx-1 font-semibold"> { rating } </span>
+        </div>
+        <h2 className="font-bold text-center text-lg"><span className="text-gray-500 font-semibold"> Price : </span> {price}</h2>
+        <div className="flex justify-center gap-2">
+            <div className="flex justify-center mt-2" onClick={() => {
+              if(userId) 
+              {
+                addToCart(id,userId)
+              }
+              else{
+                alert("You need to login to add.");
+              }
+            }}>
+              <OrangeButton name={"Add to Cart"}/>
+            </div>
         </div>
     </section>
   )

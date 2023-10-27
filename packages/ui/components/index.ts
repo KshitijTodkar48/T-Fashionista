@@ -1,6 +1,6 @@
 export * from "./LoginCard"
 export * from "./Button"
 export * from "./ProductCard"
-export * from "./AddButton"
+export * from "./OrangeButton"
 export * from "./Hero"
 export * from "./Navbar"

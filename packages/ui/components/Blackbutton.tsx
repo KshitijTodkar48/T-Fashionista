@@ -1,16 +1,20 @@
 "use client"
-import { BlackbuttonProps } from "types";
+import { ButtonProps } from "types";
 import { useRouter } from "next/navigation";
 
-export const Blackbutton = ({ name } : BlackbuttonProps) => {
+export const Blackbutton = ({ name } : ButtonProps) => {
     const router = useRouter();
     const handleClick = () => {
         if(name === "Signup")
         {
             router.push("/users/signup");
         }
-        else{
+        else if(name === "Login")
+        {
             router.push("/users/login");
+        }
+        else{
+            router.push("/users/profile");
         }
     }
     return(

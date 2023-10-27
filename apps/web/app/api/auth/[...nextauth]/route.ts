@@ -51,6 +51,17 @@ export const authOptions = {
     session : {
         strategy: "jwt"
     },
+    callbacks: {
+      async session({ session }) {
+        const sessionUser = await prisma.user.findUnique({
+          where: {
+            email: session.user.email
+          }
+      })
+      session.user.id = sessionUser?.id.toString() ;
+      return session ;
+      }
+    },
     secret: process.env.NEXTAUTH_SECRET,
     debug: process.env.NODE_ENV === "development",
 };

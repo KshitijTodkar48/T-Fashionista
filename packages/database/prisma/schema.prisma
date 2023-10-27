@@ -72,6 +72,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      UserAccount[]
   sessions      UserSession[]
+  cartItems     Product[] @relation("UserCartItems")
 }
 
 model Admin {
@@ -105,4 +106,5 @@ model Product {
   rating    String   @default("No rating")
   imageURL  String   @db.VarChar(255)
   published Boolean  @default(false)
+  addedBy   User[]   @relation("UserCartItems")
 }

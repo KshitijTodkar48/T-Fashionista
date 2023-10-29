@@ -1,10 +1,27 @@
+"use client"
 import { ProductType } from "types"
 import { OrangeButton } from "./OrangeButton"
 import { StarIcon } from "../assets" 
+import { useState, useEffect } from "react"
 
 export const ProductCard = ({ imageURL , title , rating , price , id , userId } : ProductType) => {
 
+  const [isAddedToCart , setIsAddedToCart] = useState<boolean>(false);
+
+  useEffect(() => {
+    if(!userId)
+    {
+      setIsAddedToCart(false);
+    }
+    else{
+        const productState = localStorage.getItem(`is${id}Added`) ;
+        if (productState) setIsAddedToCart(true) ;
+    }
+  } , [userId])
+
   const addToCart = async (productId: Number, userId: string) => {
+    localStorage.setItem(`is${productId}Added`, "added") ;
+    setIsAddedToCart(true);
     const response = await fetch(`/api/products/addToCart`,{
       method: "POST",
       headers: {
@@ -18,7 +35,7 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
     try {
       if(response.ok)
       {
-        alert("Item added to cart.")
+        // alert("Item added to cart.")
       }
       else{
         alert("Item already added to cart.")
@@ -44,13 +61,16 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
             <div className="flex justify-center mt-2" onClick={() => {
               if(userId) 
               {
-                addToCart(id,userId)
+                if(!isAddedToCart)
+                {
+                  addToCart(id,userId)
+                }
               }
               else{
                 alert("You need to login to add.");
               }
             }}>
-              <OrangeButton name={"Add to Cart"}/>
+              <OrangeButton name={ isAddedToCart ? "Added" : "Add to cart" } isAddedToCart={isAddedToCart} />
             </div>
         </div>
     </section>

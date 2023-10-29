@@ -13,7 +13,8 @@ export const Blackbutton = ({ name } : ButtonProps) => {
         {
             router.push("/users/login");
         }
-        else{
+        else if(name == "Go to Cart")
+        {
             router.push("/users/profile");
         }
     }

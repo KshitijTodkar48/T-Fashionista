@@ -3,8 +3,9 @@ import "ui/styles.css";
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { ProductType } from 'types';
-import { CartItemCart } from "ui";
-import { Blackbutton } from "ui/components/Blackbutton";
+import { CartItemCard } from "ui";
+import { Button, Modal } from 'antd';
+import { buttonStyle, okButtonStyle, cancelButtonStyle } from "ui/customStyles";
 
 const Cart = () => {
     const [products, setProducts] = useState<ProductType[]>([]) ;
@@ -13,10 +14,26 @@ const Cart = () => {
     //@ts-ignore
     const userId = session?.user?.id ;
 
+    // Modal functions.
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        calculateTotal();
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
     useEffect(() => {
         try {
             console.log("UserID: " + userId);
-            const displayProfile = async () => {
+            const displayCartItems = async () => {
                 const response = await fetch(`/api/users/${userId}/cart`) ;
                 const data = await response?.json() ;
                 console.log(data) ;
@@ -25,7 +42,7 @@ const Cart = () => {
             }
             if(userId)
             {
-                displayProfile();
+                displayCartItems();
             }
         } catch (error) {
             console.log(error);
@@ -35,19 +52,35 @@ const Cart = () => {
     const calculateTotal = () => {
         let totalCost = products.reduce((accumulator, product) => { return accumulator + parseFloat(product.price) } , 0) ;
         totalCost = parseFloat(totalCost.toFixed(2)) ;
-        console.log(totalCost);
+        console.log(totalCost) ;
         setTotal(totalCost) ;
+    }
+
+    const removeItem = (productId:number) => {
+        if(!userId)
+           return ;
+
+        const newProductsArray = products.filter((product) => product.id !== productId) ;
+        setProducts(newProductsArray);
+        localStorage.removeItem(`is${productId.toString()}Added`);
+        fetch("/api/products/removeFromCart",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ userId , productId })
+        });
     }
 
     return(
         <section className="flex flex-col items-center">
-            <h1 className="text-red-500 font-bold text-5xl text-center">
+            <h1 className="text-red-500 font-bold text-5xl text-center m-4">
                 Cart
             </h1>
             <div className="flex flex-col gap-6 w-full items-center">
                 { products.map((product) => 
                   <div key={product.id}>
-                    <CartItemCart {...product} setTotal={setTotal} abc={() => total}/> 
+                    <CartItemCard {...product} removeItem={removeItem}/> 
                   </div>
                   )
                 }
@@ -55,10 +88,21 @@ const Cart = () => {
             {
                 products.length ? 
                 <>
-                   <div onClick={() => { calculateTotal() ; alert(total) }} className="m-4">
-                      <Blackbutton name="Checkout" />
+                   <Button style={buttonStyle} type="primary" onClick={showModal}>
+                        Checkout
+                    </Button>
+                    <Modal okText="Place Order" okButtonProps={{style:okButtonStyle}} cancelButtonProps={{style:cancelButtonStyle}} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                        <div className="flex flex-col gap-6 mb-8">
+                            <p className="text-[23px] text-orange-600 font-semibold">Are you sure ?</p>
+                            <p className="text-[27px] text-gray-600">Your total : <span className="font-semibold text-black"> {total} $ </span></p>
+                        </div>
+                    </Modal>
+                </> : 
+                <>
+                   <div className="text-gray-400 text-2xl mt-4">
+                       Your cart is Empty !
                    </div>
-                </> : <></>
+                </>
             }
         </section>
     )

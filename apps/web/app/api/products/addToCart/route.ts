@@ -29,7 +29,7 @@ export const POST = async (request:Request) => {
             return new NextResponse("Product not found.", { status: 404 });
         }
   
-        // Add the product to the user's cartItems using the addTo operation.
+        // Add the product to the user's cartItems using the connect operation.
         const updatedUser = await prisma.user.update({
           where: { id: userId },
           data: {

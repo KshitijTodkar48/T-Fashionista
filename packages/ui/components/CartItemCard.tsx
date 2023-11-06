@@ -2,10 +2,8 @@
 import { ProductType } from "types"
 import { StarIcon } from "../assets"
 import { OrangeButton } from "./OrangeButton"
-import { useState } from "react"
 
-export const CartItemCart = ({ imageURL , title , rating , price , id , userId , setTotal , abc } : ProductType & { setTotal:(callback: number) => void , abc: () => number }) => {
-    const [quantity, setQuantity] = useState<number>(1);
+export const CartItemCard = ({ imageURL , title , rating , price , id , removeItem } : ProductType & {removeItem:(productId:number) => void}) => {
     return(
         <section className="border p-4 shadow-lg md:flex md:gap-10 lg:gap-15">
             <div className="flex flex-col min-w-[215px] items-center lg:flex-row lg:gap-5 lg:min-w-[415px]">
@@ -22,22 +20,9 @@ export const CartItemCart = ({ imageURL , title , rating , price , id , userId ,
             <div className="flex flex-col items-center justify-center m-2">
                 <div className="flex gap-2 items-center m-2">
                   <span> Qty :</span> 
-                  <button className="bg-black text-white font-bold rounded-full px-[15px] py-[5px] text-xl"
-                   onClick={() => { 
-                    if(quantity > 1)
-                    {
-                        setQuantity((qty) => qty - 1);
-                        setTotal(abc() - parseFloat(price));
-                    }
-                    }}> - </button>
-                  <span className="text-md font-semibold border-2 text-center py-1 min-w-[48px]"> {quantity} </span>
-                  <button className="bg-black text-white font-bold rounded-full px-3 py-1 text-xl"
-                   onClick={() => { 
-                        setQuantity((qty) => qty + 1);
-                        setTotal(abc() + parseFloat(price));
-                    }}> + </button>
+                  <span className="text-md font-semibold border-2 text-center py-1 min-w-[48px]"> 1 </span>
                 </div>
-                <div className="mt-2">
+                <div className="mt-2" onClick={() => { removeItem(id) }}>
                     <OrangeButton name="Remove from Cart"/>
                 </div>
             </div>

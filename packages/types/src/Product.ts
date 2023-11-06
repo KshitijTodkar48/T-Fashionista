@@ -4,6 +4,6 @@ export interface ProductType {
     price: string;
     rating?: string;
     imageURL: string;
-    published: Boolean;
+    published: boolean;
     userId?: string | undefined;
 }

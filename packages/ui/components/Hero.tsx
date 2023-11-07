@@ -1,7 +1,7 @@
 export const Hero = () => {
     return (
-        <section className="max-w-[1335px] px-10 flex flex-col lg:flex-row items-center justify-center gap-10">
-            <div className="flex flex-col w-full lg:w-[45%] items-center justify-center">
+        <section className="max-w-[1340px] px-10 flex flex-col lg:flex-row items-center justify-center gap-10">
+            <div className="flex flex-col w-full lg:w-1/2 items-center justify-center">
                 <h1 className="flex flex-col gap-3">
                    <div className="font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">Slay the Street with</div>
                    <div className="font-bold flex flex-col sm:flex-row lg:flex-col gap-2 sm:gap-3 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">

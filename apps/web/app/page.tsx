@@ -8,10 +8,11 @@ export default async function Page() {
   const session = await getServerSession(authOptions) ;
   // @ts-ignore
   const userId = session?.user?.id ;
+  const userEmail = session?.user?.email;
   
   return (
     <main className="flex flex-col items-center">
-      <Navbar userId={userId}/>
+      <Navbar userId={userId} userEmail={userEmail}/>
       <div className="mt-[75px]">
         <Hero />
       </div>

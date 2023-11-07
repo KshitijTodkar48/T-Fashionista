@@ -1,6 +1,7 @@
 "use client"
 import { ButtonProps } from "types";
 import { useRouter } from "next/navigation";
+import { CartIcon } from "../assets";
 
 export const Blackbutton = ({ name } : ButtonProps) => {
     const router = useRouter();
@@ -19,8 +20,8 @@ export const Blackbutton = ({ name } : ButtonProps) => {
         }
     }
     return(
-        <button className="text-lg px-5 py-1 border rounded-full bg-black text-white hover:bg-white hover:text-black hover:border hover:border-black" onClick={handleClick}>
-            {name}
+        <button className="flex items-center gap-3 text-base lg:text-lg px-5 py-1 border rounded-full bg-black text-white font-[500] hover:bg-gray-600" onClick={handleClick}>
+            { name === "Go to Cart" ? <> {name} <CartIcon /> </> : <> { name } </> }
         </button>
     )
 }

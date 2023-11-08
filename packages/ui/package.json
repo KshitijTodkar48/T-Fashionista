@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "next-auth": "^4.24.3",
-    "types": "*"
+    "react-hot-toast": "^2.4.1",
+    "types": "*",
+    "zod-schemas": "*"
   },
   "devDependencies": {
     "@turbo/gen": "^1.10.12",

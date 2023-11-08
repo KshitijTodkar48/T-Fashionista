@@ -1,10 +1,19 @@
 import bcrypt from "bcrypt";
 import { prisma } from "database";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { signupFormSchema } from "zod-schemas";
 
-export async function POST(request:Request){
+export async function POST(request:NextRequest){
     const body = await request.json() ;
-    const { email , password } = body ;
+
+    // Zod input-validation
+    const validatedData = signupFormSchema.safeParse(body);
+    if(!validatedData.success)
+    {
+        return new NextResponse("Invalid data format" , { status: 400 });;
+    }
+
+    const { email , password } = validatedData.data ;
     console.log(body) ;
 
     if(!email || !password)

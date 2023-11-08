@@ -3,10 +3,12 @@ import { ProductType } from "types"
 import { OrangeButton } from "./OrangeButton"
 import { StarIcon } from "../assets" 
 import { useState, useEffect } from "react"
+import toast, { Toaster } from 'react-hot-toast';
 
 export const ProductCard = ({ imageURL , title , rating , price , id , userId } : ProductType) => {
 
   const [isAddedToCart , setIsAddedToCart] = useState<boolean>(false);
+  const notify = () => toast.success("Item added to Cart.");
 
   useEffect(() => {
     if(!userId)
@@ -46,10 +48,10 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
     }
   }
   return (
-    <section className="border p-5 m-2 shadow-lg">
+    <section className="border p-5 m-2 rounded-2xl shadow-lg">
         <div>
             <img src={imageURL} alt="T-shirt image"
-            className="h-[250px] w-[250px]" />
+            className="h-[250px] w-[250px] rounded-2xl border"/>
         </div>
         <h1 className="font-semibold text-lg text-gray-600 text-center m-2">{title}</h1>
         <div className="flex justify-center m-2">
@@ -63,7 +65,8 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
               {
                 if(!isAddedToCart)
                 {
-                  addToCart(id,userId)
+                  addToCart(id,userId) ;
+                  notify() ;
                 }
               }
               else{
@@ -72,6 +75,7 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
             }}>
               <OrangeButton name={ isAddedToCart ? "Added" : "Add to cart" } isAddedToCart={isAddedToCart} />
             </div>
+            <Toaster/>
         </div>
     </section>
   )

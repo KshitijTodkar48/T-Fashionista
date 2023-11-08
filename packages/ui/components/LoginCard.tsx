@@ -2,8 +2,10 @@
 import { useState } from "react";
 import { Button } from "./Button";
 import { LoginCardProps } from "types";
-import { useRouter } from "next/navigation"
-import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import toast, { Toaster } from 'react-hot-toast';
+import { loginFormSchema, signupFormSchema } from "zod-schemas";
 
 export const LoginCard = ({ page , name }: LoginCardProps) => {
 
@@ -14,40 +16,66 @@ export const LoginCard = ({ page , name }: LoginCardProps) => {
   const handleFormSubmit = async(e:React.FormEvent) => {
     e.preventDefault();
     if(page === "Signup")
-    { // Signup
-        const response = await fetch("/api/users/signup",{
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            email,
-            password
-          })
-        })
-        try {
-          if (response.ok) {
-            router.push("/users/login");
-          } else {
-            alert("User with this email already exists.");
+    {  
+      try {
+          // Signup
+          const validatedData = signupFormSchema.safeParse({ email, password });
+          if(!validatedData.success)
+          {
+            toast("Enter valid email and password.", {
+              icon: '❗'
+            })
+            return;
           }
+          const toastId1 = toast.loading("Signing up..") ;
+          const response = await fetch("/api/users/signup",{
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(validatedData.data)
+          })
+          
+            toast.dismiss(toastId1);
+            if (response.ok) {
+              toast.success("Signed Up successfully !");
+              await new Promise((res):any => setTimeout(res,1200));
+              router.push("/users/login");
+            } else {
+              toast.error("User with this email already exists.");
+            }
         } catch (error) {
           // Handle network or unexpected errors.
           console.error("An error occurred during the fetch:", error);
         }
     }
-    else{ // Login
-        const response = await signIn("credentials", {
-            email,
-            password,
-            redirect: false
-          })
-        try {
-          if(response?.ok)
-            router.push("/");
-          else{
-            alert("Invalid username or password.");
+    else{ 
+      try {
+          // Login
+          const validatedData = loginFormSchema.safeParse({ email, password });
+          if(!validatedData.success)
+          {
+            toast("Enter a valid email.", {
+              icon: '❗'
+            })
+            return;
           }
+          const toastId2 = toast.loading("Logging in..") ;
+          const response = await signIn("credentials", {
+              email,
+              password,
+              redirect: false
+            })
+          
+            toast.dismiss(toastId2);
+            if(response?.ok) {
+              toast.success("Logged in successfully !");
+              await new Promise((res):any => setTimeout(res,1200));
+              router.push("/");
+            }
+            else{
+              toast.error("Invalid username or password.");
+            }
         } catch (error) {
           // Handle network or unexpected errors.
           console.error("An error occurred during the fetch:", error);
@@ -81,11 +109,16 @@ export const LoginCard = ({ page , name }: LoginCardProps) => {
                     setPassword(e.target.value)
                   }}
                   className="border px-5 py-1 rounded-full"/>
+                  { page === "Signup" && <span className="text-sm text-gray-400 text-center">
+                    * Password must contain at least 6 characters. 
+                    </span> 
+                  }
               </div>
               <div className="w-full">
                 <Button name={page} type="submit"/>
               </div>
             </div>
+            <Toaster />
         </div>
       </form>
     )

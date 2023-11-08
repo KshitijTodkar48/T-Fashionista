@@ -3,9 +3,11 @@ import "ui/styles.css";
 import { ProductType } from "types";
 import { ProductCard } from "./ProductCard"
 import { useState, useEffect } from "react";
+import { Loader } from "../assets";
 
 export const Products = ({ userId }:{ userId: string | undefined}) => {
     const [products , setProducts] = useState<ProductType[]>([]) ;
+    const [isLoading, setIsLoading] = useState<boolean>(true) ;
 
     useEffect(() => { ;
         const fetchProducts = async() => {
@@ -13,12 +15,22 @@ export const Products = ({ userId }:{ userId: string | undefined}) => {
            const response = await fetch("/api/products") ;
            const data = await response.json() ;
            setProducts(data) ;
+           setIsLoading(false) ;
           } catch (error) {
             console.log(error);
           }
         }
         fetchProducts() ;
       } , [])
+
+    if(isLoading)
+    {
+       return(
+        <div className="h-[300px] flex items-center"> 
+          <Loader /> 
+        </div>
+       )
+    }  
 
     return(
         <section className="mt-10 gap-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

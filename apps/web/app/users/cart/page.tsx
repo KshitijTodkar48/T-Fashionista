@@ -6,10 +6,12 @@ import { ProductType } from 'types';
 import { CartItemCard } from "ui";
 import { Button, Modal } from 'antd';
 import { buttonStyle, okButtonStyle, cancelButtonStyle } from "ui/customStyles";
+import { Loader } from "ui/assets";
 
 const Cart = () => {
     const [products, setProducts] = useState<ProductType[]>([]) ;
     const [total, setTotal] = useState<number>(0) ;
+    const [isLoading, setIsLoading] = useState<boolean>(true) ;
     const { data:session } = useSession();
     //@ts-ignore
     const userId = session?.user?.id ;
@@ -38,6 +40,7 @@ const Cart = () => {
                 const data = await response?.json() ;
                 console.log(data) ;
                 setProducts(data.cartItems);
+                setIsLoading(false);
                 calculateTotal();
             }
             if(userId)
@@ -71,6 +74,15 @@ const Cart = () => {
             body: JSON.stringify({ userId , productId })
         });
     }
+
+    if(isLoading)
+    {
+       return(
+        <div className="h-[500px] flex items-center"> 
+          <Loader /> 
+        </div>
+       )
+    }  
 
     return(
         <section className="flex flex-col items-center">

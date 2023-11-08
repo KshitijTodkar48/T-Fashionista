@@ -1,7 +1,7 @@
 import { prisma } from "database";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const POST = async(request:Request) => {
+export const POST = async(request:NextRequest) => {
     const body = await request.json();
     const { userId, productId } = body;
     try{

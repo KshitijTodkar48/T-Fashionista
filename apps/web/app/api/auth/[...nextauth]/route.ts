@@ -19,7 +19,7 @@ export const authOptions = {
             // Logic to look up the user from the credentials supplied.
               if(!credentials?.email || !credentials.password)
               {
-                return null ;
+                throw new Error("Credentials not found.") ;
               }
 
               // Check if user with this email exists.
@@ -31,7 +31,7 @@ export const authOptions = {
 
               // If user does not exist.
               if(!user) {
-                return null ;
+                throw new Error("User does not exist.") ;
               }
 
               // If user exists, match the passwords.
@@ -40,7 +40,7 @@ export const authOptions = {
               if(!passwordsMatch)
               { 
                 // Passwords do not match.
-                return null ;
+                throw new Error("Incorrect password.") ;
               }
 
               // return the user object if everything is valid.

@@ -5,7 +5,7 @@ import { OrangeButton } from "./OrangeButton"
 
 export const CartItemCard = ({ imageURL , title , rating , price , id , removeItem } : ProductType & {removeItem:(productId:number) => void}) => {
     return(
-        <section className="border p-4 shadow-lg md:flex md:gap-10 lg:gap-15">
+        <section className="border rounded-xl p-4 shadow-lg md:flex md:gap-10 lg:gap-15">
             <div className="flex flex-col min-w-[215px] items-center lg:flex-row lg:gap-5 lg:min-w-[415px]">
                 <img src={imageURL} alt="T-shirt image" className="h-[180px] w-[180px]" />
                 <div className="">

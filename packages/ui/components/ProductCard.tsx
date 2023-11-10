@@ -16,13 +16,13 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
       setIsAddedToCart(false);
     }
     else{
-        const productState = localStorage.getItem(`is${id}Added`) ;
+        const productState = localStorage.getItem(`is${id}Addedfor-${userId}`) ;
         if (productState) setIsAddedToCart(true) ;
     }
   } , [userId])
 
   const addToCart = async (productId: Number, userId: string) => {
-    localStorage.setItem(`is${productId}Added`, "added") ;
+    localStorage.setItem(`is${productId}Addedfor-${userId}`, "added") ;
     setIsAddedToCart(true);
     const response = await fetch(`/api/products/addToCart`,{
       method: "POST",

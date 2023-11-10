@@ -2,6 +2,7 @@
 import "ui/styles.css";
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { ProductType } from 'types';
 import { CartItemCard } from "ui";
 import { Button, Modal } from 'antd';
@@ -19,6 +20,8 @@ const Cart = () => {
     // Modal functions.
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const router = useRouter();
+
     const showModal = () => {
         calculateTotal();
         setIsModalOpen(true);
@@ -26,6 +29,7 @@ const Cart = () => {
 
     const handleOk = () => {
         setIsModalOpen(false);
+        router.push('/users/cart/purchase');
     };
 
     const handleCancel = () => {

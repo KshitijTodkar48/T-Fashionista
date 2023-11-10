@@ -10,6 +10,18 @@ export const buttonStyle = {
 
 export const okButtonStyle = {
     "backgroundColor":"black",
+    "fontWeight":"bold",
+    "color":"white",
+    "fontSize":"15px",
+    "padding":"2px 10px",
+    "width":"110px",
+    "height":"35px"
+}
+
+export const orangeButtonStyle = {
+    "backgroundColor":"rgb(234,88,12)",
+    "fontWeight":"bold",
+    "color":"white",
     "fontSize":"15px",
     "padding":"2px 10px",
     "width":"110px",
@@ -18,6 +30,7 @@ export const okButtonStyle = {
 
 export const cancelButtonStyle = {
     "fontSize":"15px",
+    "fontWeight":"bold",
     "padding":"2px 10px",
     "width":"80px",
     "height":"35px",

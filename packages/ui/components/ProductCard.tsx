@@ -1,14 +1,16 @@
 "use client"
 import { ProductType } from "types"
 import { OrangeButton } from "./OrangeButton"
-import { StarIcon } from "../assets" 
+import { StarIcon } from "../assets"
 import { useState, useEffect } from "react"
-import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from "next/navigation"
+import toast, { Toaster } from "react-hot-toast"
 
 export const ProductCard = ({ imageURL , title , rating , price , id , userId } : ProductType) => {
 
   const [isAddedToCart , setIsAddedToCart] = useState<boolean>(false);
   const notify = () => toast.success("Item added to Cart.");
+  const router = useRouter();
 
   useEffect(() => {
     if(!userId)
@@ -54,12 +56,17 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
             className="h-[250px] w-[250px] rounded-2xl border"/>
         </div>
         <h1 className="font-semibold text-lg text-gray-600 text-center m-2">{title}</h1>
-        <div className="flex justify-center m-2">
+        <div className="flex justify-center items-center m-2">
            <StarIcon />
-           <span className="text-gray-500 mx-1 font-semibold"> { rating } </span>
+           <span className="text-gray-500 mx-[6px] pt-[2px] text-lg font-semibold"> { rating } </span>
         </div>
         <h2 className="font-bold text-center text-lg"><span className="text-gray-500 font-semibold"> Price : </span> {price}</h2>
         <div className="flex justify-center gap-2">
+            <div className="flex justify-center mt-2" onClick={() => {
+                router.push(`products/${id}`) ;
+              }}>
+              <OrangeButton name="View"/>
+            </div>
             <div className="flex justify-center mt-2" onClick={() => {
               if(userId) 
               {
@@ -70,9 +77,9 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
                 }
               }
               else{
-                alert("You need to login to add.");
+                router.push("/users/login") ;
               }
-            }}>
+              }}>
               <OrangeButton name={ isAddedToCart ? "Added" : "Add to cart" } isAddedToCart={isAddedToCart} />
             </div>
             <Toaster/>

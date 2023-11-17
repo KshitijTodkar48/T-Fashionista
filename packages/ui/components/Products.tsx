@@ -3,7 +3,7 @@ import "ui/styles.css";
 import { ProductType } from "types";
 import { ProductCard } from "./ProductCard"
 import { useState, useEffect } from "react";
-import { Loader } from "../assets";
+import { LoadingSkeleton } from "./LoadingSkeleton";
 
 export const Products = ({ userId }:{ userId: string | undefined}) => {
     const [products , setProducts] = useState<ProductType[]>([]) ;
@@ -26,8 +26,8 @@ export const Products = ({ userId }:{ userId: string | undefined}) => {
     if(isLoading)
     {
        return(
-        <div className="h-[300px] flex items-center"> 
-          <Loader /> 
+        <div > 
+          <LoadingSkeleton />
         </div>
        )
     }  

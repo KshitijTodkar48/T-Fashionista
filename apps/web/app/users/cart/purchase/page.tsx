@@ -47,24 +47,24 @@ const PurchasePage = () => {
   };
 
   return (
-    <section className="m-10 border px-20 py-16 rounded-lg">
-      <Steps 
+    <section className="m-10 border px-20 py-16 rounded-lg shadow-md">
+      <Steps
         current={current}
         items={[
           {
             title: "Details",
             description: "Provide your details.",
-            icon:<FormOutlined style={{"color":"rgb(234,88,12)", "fontSize":"50px"}}/>
+            icon:<FormOutlined style={{"fontSize":"50px"}}/>
           },
           {
             title: "Payment",
             description: "Select a payment option.",
-            icon:<CreditCardOutlined style={{"color":"rgb(234,88,12)", "fontSize":"50px"}}/>
+            icon:<CreditCardOutlined style={{"fontSize":"50px"}}/>
           },
           {
             title: "Done",
             description: "Order Placed.",
-            icon:<CheckCircleOutlined style={{"color":"rgb(234,88,12)", "fontSize":"50px"}}/>
+            icon:<CheckCircleOutlined style={{"fontSize":"50px"}}/>
           },
         ]}
       />

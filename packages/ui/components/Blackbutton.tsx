@@ -21,7 +21,7 @@ export const Blackbutton = ({ name } : ButtonProps) => {
     }
     return(
         <button className="flex items-center gap-3 text-base lg:text-lg px-5 py-1 border rounded-full bg-black text-white font-[500]" onClick={handleClick}>
-            { name === "Go to Cart" ? <> {name} <CartIcon /> </> : <> { name } </> }
+            { name === "Go to Cart" ? <> <div className="block max-sm:hidden"> {name} </div> <CartIcon /> </> : <> { name } </> }
         </button>
     )
 }

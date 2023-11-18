@@ -2,27 +2,125 @@
 import "ui/styles.css";
 import { useState, useEffect } from "react";
 import { ProductType } from "types";
+import { OrangeButtonLarge, StarIconLarge } from "ui";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+import { Loader } from "ui/assets";
 
 const ProductDetails = ({ params }) => {
     const [product , setProduct] = useState<ProductType | null>(null);
-    useEffect(() => { 
-        const fetchProductDetails = async() => {
-            const response = await fetch(`/api/products/${params?.id}`);
-            const data = await response.json();
-            setProduct(data);
-        }
-        fetchProductDetails();
-    }, [])
+    const [selectedSize, setSelectedSize] = useState<string>('');
+    const [isAddedToCart , setIsAddedToCart] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true) ;
+    const notify = () => toast.success("Item added to Cart.");
+    const router = useRouter();
+    const { data: session } = useSession();
+    // @ts-ignore
+    const userId = session?.user?.id;
+    const handleSizeChange = (e) => {
+      setSelectedSize(e.target.value);
+    };
+
+    useEffect(() => {
+            const fetchProductDetails = async() => {
+                if(!userId)
+                {
+                    setIsAddedToCart(false);
+                }
+                else{
+                    const productState = localStorage.getItem(`is${params?.id}Addedfor-${userId}`) ;
+                    if (productState) setIsAddedToCart(true) ;
+                }
+                const response = await fetch(`/api/products/${params?.id}`);
+                const data = await response.json();
+                setProduct(data);
+                setIsLoading(false);
+            }
+            fetchProductDetails();
+        }, [userId])
+
+        const addToCart = async (userId: string) => {
+            const productId = parseInt(params?.id) ;
+            setIsAddedToCart(true);
+            const response = await fetch(`/api/products/addToCart`,{
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                productId,
+                userId
+              })
+            })
+            try {
+              if(response.ok)
+              {
+                // alert("Item added to cart.")
+                localStorage.setItem(`is${productId}Addedfor-${userId}`, "added") ;
+              }
+              else{
+                alert("Something went wrong.")
+              }
+            } catch (error) {
+              console.log(error);
+              alert("An error occured.")
+            }
+          }
+
     return(
-        <section className="flex gap-5 w-full h-[100vh] justify-center items-center p-10 border shadow-md rounded-xl">
-            <div className="w-1/2">
-                <img src={product?.imageURL} className="rounded-xl h-4/5 w-4/5" alt="Product Image" />
-            </div>
-            <div className="w-1/2">
-                <h1> {product?.title} </h1>
-                <h2> {product?.rating} </h2>
-                <h1> {product?.price} </h1>
-            </div>
+        <section className="w-full flex justify-center">
+            <section className="flex flex-col lg:flex-row w-full justify-center items-center p-5 my-8 max-w-[1530px]">
+                <div className="w-4/5 md:w-1/2 flex justify-center mb-8">
+                  { isLoading ? <Loader /> :  <img src={product?.imageURL} className="rounded-2xl w-[90%] max-h-[600px]" alt="Product Image" />}
+                </div>
+                <div className="w-4/5 md:w-1/2 flex flex-col max-lg:items-center gap-4">
+                    <h1 className="text-2xl xl:text-5xl font-bold"> {product?.title} </h1>
+                    <h2 className="text-xl xl:text-3xl text-gray-500 font-semibold flex items-center gap-3"> Ratings : <div className="flex items-center gap-2 pt-1"> <StarIconLarge /> <span className="font-bold text-black"> {product?.rating} </span> </div> </h2>
+                    <h2 className="text-xl xl:text-3xl text-gray-500 font-semibold flex items-center gap-3"> Price : <span className="font-bold text-black"> {product?.price} </span> </h2>
+                    <div className="flex items-center gap-3">
+                        <label htmlFor="sizeDropdown" className="text-2xl font-semibold">
+                            Size:
+                        </label>
+                        <select
+                            id="sizeDropdown"
+                            value={selectedSize}
+                            onChange={handleSizeChange}
+                            className="px-4 py-2 border rounded-lg text-base xl:text-xl"
+                        >
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+                    <p className="text-base xl:text-lg text-gray-500 font-semibold">
+                        Elevate your style with our premium {product?.title}. Crafted from
+                        high-quality, breathable cotton, this shirt is designed for comfort and durability.
+                        Whether you're heading out for a casual day or meeting up with friends, this versatile
+                        piece is a perfect choice.
+                    </p>
+                    <p className="text-base xl:text-lg text-gray-500 font-semibold mt-2">
+                        Sizes are available in Small (S), Medium (M), Large (L), and Extra Large (XL).
+                    </p>
+                    <div className="flex justify-center mt-4" onClick={() => {
+                        if(userId) 
+                        {
+                            if(!isAddedToCart)
+                            {
+                            addToCart(userId) ;
+                            notify() ;
+                            }
+                        }
+                        else{
+                            router.push("/users/login") ;
+                        }
+                        }}>
+                    <OrangeButtonLarge name={ isAddedToCart ? "Added" : "Add to cart" } isAddedToCart={isAddedToCart} />
+                </div>
+                    <Toaster/>
+                </div>
+            </section>
         </section>
     )
 }

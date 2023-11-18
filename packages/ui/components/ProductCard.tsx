@@ -24,7 +24,6 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
   } , [userId])
 
   const addToCart = async (productId: Number, userId: string) => {
-    localStorage.setItem(`is${productId}Addedfor-${userId}`, "added") ;
     setIsAddedToCart(true);
     const response = await fetch(`/api/products/addToCart`,{
       method: "POST",
@@ -40,9 +39,10 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
       if(response.ok)
       {
         // alert("Item added to cart.")
+        localStorage.setItem(`is${productId}Addedfor-${userId}`, "added") ;
       }
       else{
-        alert("Item already added to cart.")
+        alert("Something went wrong.")
       }
     } catch (error) {
       console.log(error);

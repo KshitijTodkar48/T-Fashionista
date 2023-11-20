@@ -16,10 +16,10 @@ export const PaymentOptions = () => {
     <section className="flex flex-col gap-[15px] mt-[30px]">
       <Radio.Group onChange={onChange} value={value}>
         <Space direction="vertical">
-          <Radio value={1}>EMI</Radio>
+          <Radio value={1}>Online Payment (UPI, Net Banking)</Radio>
           <Radio value={2}>Cash on Delivery</Radio>
           <Radio value={3}>
-            Pay Now
+            Credit / Debit Card
             {value === 3 ? (
               <Input
                 placeholder="Card number"

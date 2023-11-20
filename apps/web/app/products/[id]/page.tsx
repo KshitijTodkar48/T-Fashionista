@@ -6,7 +6,7 @@ import { OrangeButtonLarge, StarIconLarge } from "ui";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-import { Loader } from "ui/assets";
+import { ImageSkeleton } from "ui";
 
 const ProductDetails = ({ params }) => {
     const [product , setProduct] = useState<ProductType | null>(null);
@@ -72,7 +72,7 @@ const ProductDetails = ({ params }) => {
         <section className="w-full flex justify-center">
             <section className="flex flex-col lg:flex-row w-full justify-center items-center p-5 my-8 max-w-[1530px]">
                 <div className="w-4/5 md:w-1/2 flex justify-center mb-8">
-                  { isLoading ? <Loader /> :  <img src={product?.imageURL} className="rounded-2xl w-[90%] max-h-[600px]" alt="Product Image" />}
+                  { isLoading ? <ImageSkeleton /> :  <img src={product?.imageURL} className="rounded-2xl w-[90%] max-h-[600px]" alt="Product Image" />}
                 </div>
                 <div className="w-4/5 md:w-1/2 flex flex-col max-lg:items-center gap-4">
                     <h1 className="text-2xl xl:text-5xl font-bold"> {product?.title} </h1>

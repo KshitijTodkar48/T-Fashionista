@@ -30,3 +30,9 @@ export const LoadingSkeleton = () => {
         </section>
     )
 }
+
+export const ImageSkeleton = () => {
+    return(
+        <Skeleton.Image active style={{"width":"250px","height":"300px","borderRadius":"16px"}} />
+    )
+}

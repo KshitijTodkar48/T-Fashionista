@@ -7,7 +7,7 @@ export const CartItemCard = ({ imageURL , title , rating , price , id , removeIt
     return(
         <section className="border rounded-xl p-4 shadow-lg md:flex md:gap-10 lg:gap-15">
             <div className="flex flex-col min-w-[215px] items-center lg:flex-row lg:gap-5 lg:min-w-[415px]">
-                <img src={imageURL} alt="T-shirt image" className="h-[180px] w-[180px]" />
+                <img src={imageURL} alt="T-shirt image" className="h-[180px] w-[180px] rounded-xl" />
                 <div className="">
                     <h1 className="font-semibold text-lg text-gray-600 text-center m-2">{title}</h1>
                     <div className="flex justify-center m-2">

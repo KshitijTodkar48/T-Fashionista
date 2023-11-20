@@ -8,13 +8,35 @@ import { FormOutlined, CreditCardOutlined, CheckCircleOutlined } from '@ant-desi
 import { DeliveryForm } from "ui";
 import { PaymentOptions } from "ui";
 import { okButtonStyle, orangeButtonStyle } from "ui/customStyles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { ProductType } from "types";
 
 const PurchasePage = () => {
   const [current, setCurrent] = useState<number>(0);
   const [component, setComponent] = useState(<DeliveryForm />);
+  const [cartItems, setCartItems] = useState<ProductType[]>([]);
   const router = useRouter();
+  const { data: session } = useSession();
+  //@ts-ignore
+  const userId = session?.user?.id ;
+
+  useEffect(() => {
+    try {
+        const getCartItems = async () => {
+            const response = await fetch(`/api/users/${userId}/cart`) ;
+            const data = await response?.json() ;
+            setCartItems(data.cartItems) ;
+        }
+        if(userId)
+        {
+           getCartItems() ;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+} , [userId])
 
   const goNext = () => {
     setCurrent((prevCurrent) => {
@@ -31,6 +53,7 @@ const PurchasePage = () => {
               </Button>,
             ]}
           />);
+          placeOrder();
         }
         return nextCurrent;
       });
@@ -44,6 +67,48 @@ const PurchasePage = () => {
         }
         return prev;
       });
+  };
+
+  const placeOrder = async() => {
+    if(!userId) return ;
+    try {
+      const itemsIds = cartItems.map((item) => item.id) ;
+      const response = await fetch(`/api/users/${userId}/purchase`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/json"
+        },
+        body: JSON.stringify({cartItemsIds: itemsIds})
+      });
+
+      if(response.ok)
+      {
+        await emptyCart();
+      }
+    } catch (error) {
+      console.log("An error occurred while placing the order: ", error);
+    }
+  }
+
+  const emptyCart = async () => {
+    if(!userId) return ;
+    try {
+      const response = await fetch(`/api/users/${userId}/emptyCart`, {
+        method: "POST",
+      });
+  
+      if (response.ok) {
+        console.log("Cart emptied successfully.");
+        cartItems.forEach((item) => {
+          localStorage.removeItem(`is${item.id.toString()}Addedfor-${userId}`);
+        })
+      } else {
+        console.error("Failed to empty cart.");
+      }
+
+    } catch (error) {
+      console.error("An error occurred while emptying the cart: ", error);
+    }
   };
 
   return (

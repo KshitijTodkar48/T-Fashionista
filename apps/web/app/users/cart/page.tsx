@@ -40,9 +40,9 @@ const Cart = () => {
         try {
             console.log("UserID: " + userId);
             const displayCartItems = async () => {
-                const response = await fetch(`/api/users/${userId}/cart`) ;
-                const data = await response?.json() ;
-                console.log(data) ;
+                const response = await fetch(`/api/users/${userId}/cart`);
+                const data = await response?.json();
+                console.log(data);
                 setProducts(data.cartItems);
                 setIsLoading(false);
                 calculateTotal();
@@ -69,7 +69,7 @@ const Cart = () => {
 
         const newProductsArray = products.filter((product) => product.id !== productId) ;
         setProducts(newProductsArray);
-        localStorage.removeItem(`is${productId.toString()}Added`);
+        localStorage.removeItem(`is${productId.toString()}Addedfor-${userId}`);
         fetch("/api/products/removeFromCart",{
             method: "POST",
             headers: {

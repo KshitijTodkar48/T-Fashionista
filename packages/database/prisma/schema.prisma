@@ -87,6 +87,7 @@ model Admin {
   updatedAt     DateTime  @updatedAt
   accounts      AdminAccount[]
   sessions      AdminSession[]
+  publishedItems Product[] @relation("PublishedItems")
 }
 
 model VerificationRequest {
@@ -109,4 +110,5 @@ model Product {
   published Boolean  @default(false)
   addedBy     User[]   @relation("CartItems")
   orderedBy   User[]   @relation("OrderedItems")
+  publishedBy Admin[]  @relation("PublishedItems")
 }

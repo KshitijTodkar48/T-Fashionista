@@ -1,11 +1,10 @@
 "use client"
-import "ui/styles.css";
 import { ProductType } from "types";
 import { ProductCard } from "./ProductCard"
 import { useState, useEffect } from "react";
 import { LoadingSkeleton } from "./LoadingSkeleton";
 
-export const Products = ({ userId }:{ userId: string | undefined}) => {
+export const Products = ({ Id }:{ Id: string | undefined}) => {
     const [products , setProducts] = useState<ProductType[]>([]) ;
     const [isLoading, setIsLoading] = useState<boolean>(true) ;
 
@@ -34,7 +33,7 @@ export const Products = ({ userId }:{ userId: string | undefined}) => {
 
     return(
         <section className="my-10 gap-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-           { products.map((product) => <div key={product.id}> <ProductCard {...product} userId={userId}/> </div>)}
+           { products.map((product) => <div key={product.id}> <ProductCard {...product} Id={Id}/> </div>)}
         </section>
     )
 }

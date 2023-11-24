@@ -90,7 +90,7 @@ const Cart = () => {
 
     return(
         <section className="flex flex-col items-center">
-            <h1 className="text-red-500 font-bold text-5xl text-center m-4">
+            <h1 className="text-red-500 font-bold text-4xl sm:text-5xl text-center m-4">
                 Cart
             </h1>
             <div className="flex flex-col gap-6 w-full items-center">

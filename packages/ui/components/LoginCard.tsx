@@ -7,7 +7,7 @@ import { signIn } from "next-auth/react";
 import toast, { Toaster } from 'react-hot-toast';
 import { loginFormSchema, signupFormSchema } from "zod-schemas";
 
-export const LoginCard = ({ page , name }: LoginCardProps) => {
+export const LoginCard = ({ page , name , route }: LoginCardProps) => {
 
   const [email,setEmail] = useState<string>("");
   const [password,setPassword] = useState<string>("");
@@ -28,7 +28,7 @@ export const LoginCard = ({ page , name }: LoginCardProps) => {
             return;
           }
           const toastId1 = toast.loading("Signing up..") ;
-          const response = await fetch("/api/users/signup",{
+          const response = await fetch(`/api/${route}/signup`,{
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -40,9 +40,12 @@ export const LoginCard = ({ page , name }: LoginCardProps) => {
             if (response.ok) {
               toast.success("Signed Up successfully !");
               await new Promise((res):any => setTimeout(res,1200));
-              router.push("/users/login");
+              router.push(`/${route}/login`);
             } else {
-              toast.error("User with this email already exists.");
+              if(route === "users")
+                toast.error("User with this email already exists.");
+              else
+                toast.error("Admin with this email already exists.");
             }
         } catch (error) {
           // Handle network or unexpected errors.

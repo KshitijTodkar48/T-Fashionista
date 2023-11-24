@@ -2,7 +2,7 @@ import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest, { params }) => {
-  const userId = params.userId;
+  const userId = params.id;
 
   try {
     // Update the user's cartItems to an empty array to empty the cart.

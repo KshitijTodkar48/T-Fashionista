@@ -7,16 +7,17 @@ export default async function Page() {
   // @ts-ignore
   const session = await getServerSession(authOptions) ;
   // @ts-ignore
-  const userId = session?.user?.id ;
-  const userEmail = session?.user?.email;
+  const adminId = session?.admin?.id ;
+  // @ts-ignore
+  const adminEmail = session?.admin?.email;
   
   return (
     <main className="flex flex-col items-center">
-      <Navbar Id={userId} Email={userEmail} route="users"/>
+      <Navbar Id={adminId} Email={adminEmail} route="admin"/>
       <div className="mt-[75px]">
         <Hero />
       </div>
-      <Products Id={userId}/>
+      <Products Id={adminId}/>
     </main>
   );
 }

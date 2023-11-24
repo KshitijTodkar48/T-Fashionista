@@ -5,5 +5,5 @@ export interface ProductType {
     rating?: string;
     imageURL: string;
     published: boolean;
-    userId?: string | undefined;
+    Id?: string | undefined;
 }

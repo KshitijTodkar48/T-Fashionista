@@ -3,20 +3,20 @@ import { ButtonProps } from "types";
 import { useRouter } from "next/navigation";
 import { CartIcon } from "../assets";
 
-export const Blackbutton = ({ name } : ButtonProps) => {
+export const Blackbutton = ({ name , route } : ButtonProps) => {
     const router = useRouter();
     const handleClick = () => {
         if(name === "Signup")
         {
-            router.push("/users/signup");
+            router.push(`/${route}/signup`);
         }
         else if(name === "Login")
         {
-            router.push("/users/login");
+            router.push(`/${route}/login`);
         }
         else if(name == "Go to Cart")
         {
-            router.push("/users/cart");
+            router.push(`/${route}/cart`);
         }
     }
     return(

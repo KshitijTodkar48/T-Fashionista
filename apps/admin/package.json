@@ -9,10 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "antd": "^5.11.4",
+    "bcrypt": "^5.1.1",
+    "database": "*",
     "next": "^13.4.19",
+    "next-auth": "^4.24.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "*"
+    "react-hot-toast": "^2.4.1",
+    "types": "*",
+    "ui": "*",
+    "zod-schemas": "*"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.4.19",

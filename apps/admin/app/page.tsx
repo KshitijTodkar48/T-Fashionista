@@ -1,5 +1,5 @@
 import "ui/styles.css";
-import { Hero , Navbar , Products } from "ui";
+import { Dashboard, Navbar , PublishedProducts } from "ui";
 import { getServerSession } from "next-auth"
 import { authOptions } from "./api/auth/[...nextauth]/route";
 
@@ -7,17 +7,18 @@ export default async function Page() {
   // @ts-ignore
   const session = await getServerSession(authOptions) ;
   // @ts-ignore
-  const adminId = session?.admin?.id ;
-  // @ts-ignore
-  const adminEmail = session?.admin?.email;
+  const adminId = session?.user?.id ;
+  const adminEmail = session?.user?.email;
   
   return (
     <main className="flex flex-col items-center">
       <Navbar Id={adminId} Email={adminEmail} route="admin"/>
-      <div className="mt-[75px]">
-        <Hero />
+      <div className="mt-[85px] font-bold flex flex-col items-center gap-4">
+        <h1 className="text-4xl font-bold">
+           Welcome to <span className="text-orange-500"> T-Fashonista </span>'s Seller Dashboard </h1>
+        <Dashboard />
       </div>
-      <Products Id={adminId}/>
+      <PublishedProducts Id={adminId}/>
     </main>
   );
 }

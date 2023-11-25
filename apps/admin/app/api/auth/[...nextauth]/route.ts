@@ -55,10 +55,10 @@ export const authOptions = {
       async session({ session }) {
         const sessionAdmin = await prisma.admin.findUnique({
           where: {
-            email: session.admin.email
+            email: session.user.email
           }
       })
-      session.admin.id = sessionAdmin?.id.toString() ;
+      session.user.id = sessionAdmin?.id.toString() ;
       return session ;
       }
     },

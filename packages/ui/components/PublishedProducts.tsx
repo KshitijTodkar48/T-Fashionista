@@ -1,8 +1,8 @@
 "use client"
 import { ProductType } from "types";
-import { ProductCard } from "./ProductCard"
 import { useState, useEffect } from "react";
 import { LoadingSkeleton } from "./LoadingSkeleton";
+import { AdminProductCard } from "./AdminProductCard";
 
 export const PublishedProducts = ({ Id }:{ Id: string | undefined }) => {
     const [products , setProducts] = useState<ProductType[]>([]) ;
@@ -35,7 +35,7 @@ export const PublishedProducts = ({ Id }:{ Id: string | undefined }) => {
         <section className="my-4">
           <div className="text-3xl font-semibold ml-5 mt-2">My Products</div>
           <section className="gap-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-           { products.map((product) => <div key={product.id}> <ProductCard {...product} Id={Id}/> </div>)}
+           { products.map((product) => <div key={product.id}> <AdminProductCard {...product} Id={Id}/> </div>)}
           </section>
         </section>
     )

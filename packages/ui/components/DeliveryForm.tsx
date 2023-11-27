@@ -1,4 +1,4 @@
-import { Input, InputNumber, Space, Typography } from "antd";
+import { Input, InputNumber, Space } from "antd";
 
 export const DeliveryForm = () => {
   return (

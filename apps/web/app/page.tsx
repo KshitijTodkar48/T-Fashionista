@@ -16,7 +16,7 @@ export default async function Page() {
       <div className="mt-[75px]">
         <Hero />
       </div>
-      <Products Id={userId}/>
+      <Products userId={userId}/>
     </main>
   );
 }

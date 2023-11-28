@@ -95,10 +95,7 @@ const ProductDetails = ({ params }) => {
                         </select>
                     </div>
                     <p className="text-base xl:text-lg text-gray-500 font-semibold">
-                        Elevate your style with our premium {product?.title}. Crafted from
-                        high-quality, breathable cotton, this shirt is designed for comfort and durability.
-                        Whether you're heading out for a casual day or meeting up with friends, this versatile
-                        piece is a perfect choice.
+                        {product?.description}
                     </p>
                     <p className="text-base xl:text-lg text-gray-500 font-semibold mt-2">
                         Sizes are available in Small (S), Medium (M), Large (L), and Extra Large (XL).

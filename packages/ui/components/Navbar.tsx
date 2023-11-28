@@ -1,5 +1,5 @@
 "use client";
-import { LogoutIcon, MyAccountIcon, OrdersIcon, ProfileIcon } from "../assets";
+import { Logo, LogoutIcon, MyAccountIcon, OrdersIcon, ProfileIcon } from "../assets";
 import { Blackbutton } from "./Blackbutton";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
@@ -10,18 +10,18 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
   const router = useRouter();
   return (
     <section className="w-full">
+      {/* <Logo /> */}
       <section className="flex w-full justify-between bg-orange-100 py-3 fixed text-2xl">
-        <div className="w-1/3 md:w-1/6 flex justify-center items-center cursor-pointer"> Logo </div>
+        <div className="w-1/3 md:w-1/6 flex justify-center items-center cursor-pointer">  </div>
         <div className="flex justify-evenly w-1/2 items-center max-md:hidden max-lg:text-xl lg:w-[58%]">
           <div className="cursor-pointer"> Home </div>
           <div className="cursor-pointer"> Products </div>
-          <div className="cursor-pointer"> About us </div>
           <div className="cursor-pointer"> Contact us </div>
         </div>
         <div className="flex justify-end gap-3 mr-[2rem]">
           {Id ? (
             <>
-              <Blackbutton name="Go to Cart" />
+              <Blackbutton name="Go to Cart" route={route}/>
               <div className="cursor-pointer"
                 onClick={() => {
                   setToggleDropdown((current) => !current);

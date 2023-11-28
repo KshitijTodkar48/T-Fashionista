@@ -14,7 +14,7 @@ export const Blackbutton = ({ name , route } : ButtonProps) => {
         {
             router.push(`/${route}/login`);
         }
-        else if(name == "Go to Cart")
+        else if(name === "Go to Cart")
         {
             router.push(`/${route}/cart`);
         }

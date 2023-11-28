@@ -1,9 +1,10 @@
 export interface ProductType {
     id: number;
     title: string;
+    description?: string;
     price: string;
     rating?: string;
     imageURL: string;
     published: boolean;
-    Id?: string | undefined;
+    userId?: string | undefined;
 }

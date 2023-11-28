@@ -104,6 +104,7 @@ model VerificationRequest {
 model Product {
   id        Int      @id @default(autoincrement())
   title     String   @db.VarChar(255)
+  description String @db.VarChar(300)  @default("")
   price     String   @db.VarChar(255)
   rating    String   @default("No rating")
   imageURL  String   @db.VarChar(255)

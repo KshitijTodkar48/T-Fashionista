@@ -12,7 +12,7 @@ export const OrangeButton = ({ name, isAddedToCart }:ButtonProps) => {
             </> 
             : 
             <>
-              <button className="bg-orange-600 border border-orange-600 rounded-full text-white py-1 px-5 font-semibold hover:bg-white hover:border-orange-500 hover:text-orange-600">
+              <button className="bg-[rgb(255,111,0)] border border-orange-600 rounded-full text-white py-1 px-5 font-semibold hover:bg-white hover:border-orange-500 hover:text-orange-600">
                  {name}
               </button>
             </>

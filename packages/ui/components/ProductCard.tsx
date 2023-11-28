@@ -6,24 +6,24 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import toast, { Toaster } from "react-hot-toast"
 
-export const ProductCard = ({ imageURL , title , rating , price , id , Id } : ProductType) => {
+export const ProductCard = ({ imageURL , title , rating , price , id , userId } : ProductType) => {
 
   const [isAddedToCart , setIsAddedToCart] = useState<boolean>(false);
   const notify = () => toast.success("Item added to Cart.");
   const router = useRouter();
 
   useEffect(() => {
-    if(!Id)
+    if(!userId)
     {
       setIsAddedToCart(false);
     }
     else{
-        const productState = localStorage.getItem(`is${id}Addedfor-${Id}`) ;
+        const productState = localStorage.getItem(`is${id}Addedfor-${userId}`) ;
         if (productState) setIsAddedToCart(true) ;
     }
-  } , [Id])
+  } , [userId])
 
-  const addToCart = async (productId: Number, Id: string) => {
+  const addToCart = async (productId: Number, userId: string) => {
     setIsAddedToCart(true);
     const response = await fetch(`/api/products/addToCart`,{
       method: "POST",
@@ -32,14 +32,14 @@ export const ProductCard = ({ imageURL , title , rating , price , id , Id } : Pr
       },
       body: JSON.stringify({
         productId,
-        Id
+        userId
       })
     })
     try {
       if(response.ok)
       {
         // alert("Item added to cart.")
-        localStorage.setItem(`is${productId}Addedfor-${Id}`, "added") ;
+        localStorage.setItem(`is${productId}Addedfor-${userId}`, "added") ;
       }
       else{
         alert("Something went wrong.")
@@ -68,11 +68,11 @@ export const ProductCard = ({ imageURL , title , rating , price , id , Id } : Pr
               <OrangeButton name="View"/>
             </div>
             <div className="flex justify-center mt-2" onClick={() => {
-              if(Id) 
+              if(userId) 
               {
                 if(!isAddedToCart)
                 {
-                  addToCart(id,Id) ;
+                  addToCart(id,userId) ;
                   notify() ;
                 }
               }

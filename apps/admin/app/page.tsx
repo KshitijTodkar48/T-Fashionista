@@ -14,8 +14,9 @@ export default async function Page() {
     <main className="flex flex-col items-center">
       <Navbar Id={adminId} Email={adminEmail} route="admin"/>
       <div className="mt-[85px] font-bold flex flex-col items-center gap-4">
-        <h1 className="text-4xl font-bold">
-           Welcome to <span className="text-orange-500"> T-Fashonista </span>'s Seller Dashboard </h1>
+        <h1 className="text-4xl font-bold px-5">
+           Welcome to <span className="text-orange-500"> T-Fashonista </span>'s Seller Dashboard 
+        </h1>
         <Dashboard />
       </div>
       <PublishedProducts Id={adminId}/>

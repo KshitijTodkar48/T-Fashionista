@@ -1,10 +1,7 @@
 "use client";
 import "ui/styles.css";
 import { useState, useEffect } from "react";
-import { ProductType } from "types";
-import { OrangeButtonLarge, StarIconLarge } from "ui";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { ImageSkeleton } from "ui";
 import { Input, Form, Switch } from "antd";
@@ -17,8 +14,6 @@ const ProductDetails = ({ params }) => {
   const [price, setPrice] = useState<string>("");
   const [published, setPublished] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const notify = () => toast.success("Item added to Cart.");
-  const router = useRouter();
   const { data: session } = useSession();
   // @ts-ignore
   const userId = session?.user?.id;

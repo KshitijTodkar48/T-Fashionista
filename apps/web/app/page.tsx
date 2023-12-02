@@ -13,7 +13,7 @@ export default async function Page() {
   return (
     <main className="flex flex-col items-center">
       <Navbar Id={userId} Email={userEmail} route="users"/>
-      <div className="mt-[75px]">
+      <div className="mt-[78px]" id="Home">
         <Hero />
       </div>
       <Products userId={userId}/>

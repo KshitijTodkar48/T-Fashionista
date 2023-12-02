@@ -1,5 +1,5 @@
 "use client";
-import { Logo, LogoutIcon, MyAccountIcon, OrdersIcon, ProfileIcon } from "../assets";
+import { Logo, SmallLogo, LogoutIcon, MyAccountIcon, OrdersIcon, ProfileIcon } from "../assets";
 import { Blackbutton } from "./Blackbutton";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
@@ -9,19 +9,36 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const router = useRouter();
   return (
-    <section className="w-full">
-      {/* <Logo /> */}
-      <section className="flex w-full justify-between bg-orange-100 py-3 fixed text-2xl">
-        <div className="w-1/3 md:w-1/6 flex justify-center items-center cursor-pointer">  </div>
-        <div className="flex justify-evenly w-1/2 items-center max-md:hidden max-lg:text-xl lg:w-[58%]">
-          <div className="cursor-pointer"> Home </div>
-          <div className="cursor-pointer"> Products </div>
-          <div className="cursor-pointer"> Contact us </div>
+    <section className="w-full fixed top-0 bg-white flex items-center py-2 shadow-sm">
+       <div className="sm:hidden"> <SmallLogo /> </div>
+       <div className="max-sm:hidden"> <Logo /> </div>
+        <div className="flex justify-evenly items-center max-md:hidden md:w-[52%] lg:w-[60%] xl:w-[68%] text-xl font-semibold">
+          <div className="cursor-pointer hover:text-orange-600" 
+            onClick={() => {
+            const anchor = document.querySelector('#Home')
+            anchor?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+           }}> Home
+          </div>
+          <div className="cursor-pointer hover:text-orange-600" 
+            onClick={() => {
+            const anchor = document.querySelector('#Products')
+            anchor?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+           }}> Products
+          </div>
+          <div className="cursor-pointer hover:text-orange-600 max-lg:hidden"> Contact us </div>
         </div>
-        <div className="flex justify-end gap-3 mr-[2rem]">
+        <div className="flex fixed right-0 items-center justify-end gap-2 mr-[1rem]">
           {Id ? (
             <>
-              <Blackbutton name="Go to Cart" route={route}/>
+              {
+                route === "users" ? 
+                <>
+                  <Blackbutton name="Go to Cart" route={route}/>
+                </> : 
+                <>
+                  <Blackbutton name="Add Product" route={route}/>
+                </>
+              }
               <div className="cursor-pointer"
                 onClick={() => {
                   setToggleDropdown((current) => !current);
@@ -32,12 +49,11 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
             </>
           ) : (
             <>
-              <Blackbutton name="Login" route={route} />
-              <Blackbutton name="Signup" route={route} />
+              <div className="h-10"><Blackbutton name="Login" route={route} /></div>
+              <div className="h-10"><Blackbutton name="Signup" route={route} /></div>
             </>
           )}
         </div>
-      </section>
         {toggleDropdown && (
           <div
             className="fixed top-[61px] right-2 w-[18rem] sm:w-[20rem] bg-white shadow-md rounded-lg text-lg font-semibold"

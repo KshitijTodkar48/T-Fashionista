@@ -3,10 +3,10 @@ import { ProductType } from "types";
 import { StarIcon } from "../assets";
 import { OrangeButton } from "./OrangeButton";
 
-export const AdminProductCard = ({ imageURL, title, rating, price, id, Id }: ProductType) => {
+export const AdminProductCard = ({ imageURL, title, rating, price, id }: ProductType) => {
   const router = useRouter();
   return (
-    <section className="border p-5 m-2 rounded-2xl shadow-lg">
+    <section className="border p-5 m-2 rounded-2xl shadow-lg" id="Products">
       <div>
         <img
           src={imageURL}

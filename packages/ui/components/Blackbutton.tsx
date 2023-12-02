@@ -18,6 +18,10 @@ export const Blackbutton = ({ name , route } : ButtonProps) => {
         {
             router.push(`/${route}/cart`);
         }
+        else if(name === "Add Product")
+        {
+            router.push(`/${route}/addProduct`);
+        }
     }
     return(
         <button className="flex items-center gap-3 text-base lg:text-lg px-5 py-1 border rounded-full bg-black text-white font-[500]" onClick={handleClick}>

@@ -1,5 +1,6 @@
 import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
+import { productDetailsSchema } from "zod-schemas";
 
 export const GET = async(req: NextRequest , { params }) => {
     const productId = parseInt(params.id);
@@ -28,6 +29,13 @@ export const GET = async(req: NextRequest , { params }) => {
 export const PATCH = async(req: NextRequest, { params }) => {
     const productId = parseInt(params.id);
     const body = await req.json();
+    
+    // Zod input-validation
+    const validatedData = productDetailsSchema.safeParse(body);
+    if(!validatedData.success)
+    {
+        return new NextResponse("Invalid data format" , { status: 400 });;
+    }
     try { 
         const product = await prisma.product.findUnique({
             where: {

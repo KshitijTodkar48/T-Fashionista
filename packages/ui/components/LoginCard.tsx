@@ -67,7 +67,7 @@ export const LoginCard = ({ page , name , route }: LoginCardProps) => {
           const response = await signIn("credentials", {
               email,
               password,
-              redirect: false
+              redirect:false,
             })
           
             toast.dismiss(toastId2);
@@ -75,9 +75,11 @@ export const LoginCard = ({ page , name , route }: LoginCardProps) => {
               toast.success("Logged in successfully !");
               await new Promise((res):any => setTimeout(res,1200));
               router.push("/");
+              await new Promise((res):any => setTimeout(res,1200));
+              window.location.reload();
             }
             else{
-              toast.error("Invalid username or password.");
+              toast.error("Unable to Login !");
             }
         } catch (error) {
           // Handle network or unexpected errors.

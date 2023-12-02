@@ -9,9 +9,9 @@ export const Hero = () => {
                    </div>
                    <span className=" font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">T-Shirt Styles !</span>
                 </h1>
-                <p className="text-base sm:text-lg lg:text-lg text-gray-400 font-semibold mt-5 px-2 sm:px-20 md:max-lg:w-[680px] lg:p-0">Show off your personality with our unique T-shirt styles that are perfect for self-expression. Whether you're a trendsetter, a minimalist, or a fashion enthusiast, T-Fashionista's collection has something for everyone. </p>
+                <p className="text-base sm:text-lg lg:text-lg text-[rgb(150,150,150)] font-semibold mt-5 px-2 sm:px-20 md:max-lg:w-[680px] lg:p-0">Show off your personality with our unique T-shirt styles that are perfect for self-expression. Whether you're a trendsetter, a minimalist, or a fashion enthusiast, T-Fashionista's collection has something for everyone. </p>
                 <h1 className="text-2xl lg:text-3xl font-bold mt-3 px-2 sm:px-20 md:max-lg:w-[680px] lg:p-0 xl:mr-[38px]"> Checkout our latest <span className="text-orange-500"> Summer</span> collection ! </h1>
-                <p className="text-base sm:text-lg lg:text-lg text-gray-400 font-semibold mt-1 px-2 sm:px-20 md:max-lg:w-[680px] lg:p-0"> Dive into summer with our lively T-Shirt Collection. Bursting with playful prints and vibrant colors, these tees bring a touch of sunshine to your wardrobe, making every day a celebration. </p>
+                <p className="text-base sm:text-lg lg:text-lg text-[rgb(150,150,150)] font-semibold mt-1 px-2 sm:px-20 md:max-lg:w-[680px] lg:p-0"> Dive into summer with our lively T-Shirt Collection. Bursting with playful prints and vibrant colors, these tees bring a touch of sunshine to your wardrobe, making every day a celebration. </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
                 <img className="w-[250px] h-[400px] xl:w-[315px] xl:h-[500px] rounded-xl" 

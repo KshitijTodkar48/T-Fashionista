@@ -3,40 +3,44 @@ import "ui/styles.css";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
-import { ImageSkeleton } from "ui";
+import { Loader } from "ui";
 import { Input, Form, Switch } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { productDetailsSchema } from "zod-schemas";
 
-const ProductDetails = ({ params }) => {
+const AddProductPage = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [published, setPublished] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [hasCheckedAuthorization, setHasCheckedAuthorization] = useState<boolean>(false);
   const { data: session } = useSession();
   // @ts-ignore
   const userId = session?.user?.id;
 
   useEffect(() => {
-    const fetchProductDetails = async () => {
-      const response = await fetch(`/api/products/${params?.id}`);
-      const data = await response.json();
+    if(userId)
+    {
+        setIsLoading(false);
+        setIsAuthorized(true);
+    }
+    else{
+        // If userId is not available after some time, show 401 Unauthorized.
+      setTimeout(() => {
+        if (!userId && !hasCheckedAuthorization) {
+          setIsLoading(false);
+          setIsAuthorized(false);
+          setHasCheckedAuthorization(true);
+        }
+      }, 5000); 
+    }
+  }, [userId, hasCheckedAuthorization]);
 
-      if (data) {
-        setTitle(data.title);
-        setDescription(data.description);
-        setImageURL(data.imageURL);
-        setPrice(data.price);
-        setPublished(data.published);
-      }
-      setIsLoading(false);
-    };
-    fetchProductDetails();
-  }, [userId]);
-
-  const updateDetails = async () => {
+  const addProduct = async () => {
+    if (!userId) return ;
     try {
       const validatedData = productDetailsSchema.safeParse({ title, description, imageURL, price, published });
         if(!validatedData.success)
@@ -46,9 +50,9 @@ const ProductDetails = ({ params }) => {
           })
           return;
         }
-      const toastId = toast.loading("Updating..");
-      const response = await fetch(`/api/products/${params?.id}`, {
-        method: "PATCH",
+      const toastId = toast.loading("Adding..");
+      const response = await fetch(`/api/admin/${userId}/addProduct`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -56,7 +60,7 @@ const ProductDetails = ({ params }) => {
       });
       toast.dismiss(toastId);
       if (response.ok) {
-        toast.success("Details Updated !");
+        toast.success("Product Added !");
       } else {
         toast.error("An error occurred !");
       }
@@ -66,21 +70,26 @@ const ProductDetails = ({ params }) => {
     }
   };
 
+  if(isLoading)
+  {
+    return <section className="h-[100vh] flex justify-center items-center">
+        <Loader />
+    </section>
+  }
+
+  if(!isAuthorized)
+  {
+    return <section className="h-[100vh] flex justify-center items-center">
+        <div className="flex flex-col gap-2 items-center">
+            <div className="text-4xl font-bold text-gray-400"> 401 </div>
+            <div className="text-3xl font-bold text-gray-400"> Unauthorized </div>
+        </div>
+    </section>
+  }
+
   return (
     <section className="w-full flex justify-center lg:mt-10">
-      <section className="flex flex-col lg:flex-row w-full justify-center items-center gap-3 p-5 my-8 max-w-[1530px]">
-        <div className="w-4/5 sm:w-3/5 md:w-2/5 flex justify-center mb-8">
-          {isLoading ? (
-            <ImageSkeleton />
-          ) : (
-            <img
-              src={imageURL}
-              className="rounded-2xl w-[90%] max-h-[600px]"
-              alt="Product Image"
-            />
-          )}
-        </div>
-        <div className="w-4/5 md:w-2/5 flex flex-col max-lg:items-center gap-4">
+    <div className="w-4/5 md:w-2/5 flex flex-col max-lg:items-center gap-4">
           <Form size="large" style={{ fontWeight: "bold" }}>
             <Form.Item label="Title">
               <Input
@@ -88,7 +97,7 @@ const ProductDetails = ({ params }) => {
                 value={title}
                 style={{ fontWeight: "normal" }}
                 showCount
-                maxLength={30}
+                maxLength={40}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </Form.Item>
@@ -138,18 +147,17 @@ const ProductDetails = ({ params }) => {
             <Form.Item>
               <button
                 type="submit"
-                onClick={updateDetails}
+                onClick={addProduct}
                 className="text-xl text-white bg-orange-500 hover:bg-[rgb(228,100,15)] px-4 py-2 rounded-md w-full"
               >
-                Update Details
+                Add Product
               </button>
             </Form.Item>
           </Form>
         </div>
-      </section>
       <Toaster />
     </section>
   );
 };
 
-export default ProductDetails;
+export default AddProductPage;

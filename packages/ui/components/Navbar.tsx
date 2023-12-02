@@ -8,6 +8,15 @@ import { useRouter } from "next/navigation";
 export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: string | undefined | null, route?: "users" | "admin"}) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut({
+      redirect: false,
+    });
+    router.push('/');
+    window.location.reload();
+  };
+
   return (
     <section className="w-full fixed top-0 bg-white flex items-center py-2 shadow-sm">
        <div className="sm:hidden"> <SmallLogo /> </div>
@@ -72,7 +81,9 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
             </div>
             <div 
               className="px-10 py-2 flex justify-center text-center cursor-pointer hover:bg-slate-200"
-              onClick={() => { signOut() }}
+              onClick={() => {
+                handleSignOut()
+              }}
             >
               <LogoutIcon />  <span className="w-2/3">Log out</span>
             </div>

@@ -8,6 +8,9 @@ export const GET = async(req: NextRequest , { params }) => {
         const product = await prisma.product.findUnique({
             where: {
                 id: productId
+            },
+            include: {
+                orderedBy: true
             }
         })
         

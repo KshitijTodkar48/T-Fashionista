@@ -1,17 +1,20 @@
 "use client"
 import { useState } from "react";
-import { Button } from "./Button";
 import { LoginCardProps } from "types";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import Link  from "next/link";
 import { signIn } from "next-auth/react";
 import toast, { Toaster } from 'react-hot-toast';
 import { loginFormSchema, signupFormSchema } from "zod-schemas";
+import { Logo } from "../assets";
 
-export const LoginCard = ({ page , name , route }: LoginCardProps) => {
+export const LoginCard = ({ page , route }: LoginCardProps) => {
 
+  const [name,setName] = useState<string>("");
   const [email,setEmail] = useState<string>("");
   const [password,setPassword] = useState<string>("");
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleFormSubmit = async(e:React.FormEvent) => {
     e.preventDefault();
@@ -19,10 +22,10 @@ export const LoginCard = ({ page , name , route }: LoginCardProps) => {
     {  
       try {
           // Signup
-          const validatedData = signupFormSchema.safeParse({ email, password });
+          const validatedData = signupFormSchema.safeParse({ name, email, password });
           if(!validatedData.success)
           {
-            toast("Enter valid email and password.", {
+            toast("Enter valid data.", {
               icon: '❗'
             })
             return;
@@ -75,8 +78,6 @@ export const LoginCard = ({ page , name , route }: LoginCardProps) => {
               toast.success("Logged in successfully !");
               await new Promise((res):any => setTimeout(res,1200));
               router.push("/");
-              await new Promise((res):any => setTimeout(res,1200));
-              window.location.reload();
             }
             else{
               toast.error("Unable to Login !");
@@ -89,43 +90,69 @@ export const LoginCard = ({ page , name , route }: LoginCardProps) => {
   }
 
     return (
-      <form onSubmit={handleFormSubmit}>
-          <div className="flex flex-1 h-screen items-center justify-center bg-sky-200">
-            <div className="flex flex-col gap-6 sm:gap-8 justify-center items-center bg-white p-5 sm:p-10 h-3/6 w-2/3 lg:w-[37%] rounded-2xl">
-              <div className="text-[27px] font-bold">
-                <h1> {page} to <span className="text-orange-500">{name}</span> </h1>
-              </div>
-              <div className="flex flex-col gap-5 w-full text-lg">
-                <input 
-                  type="text"
-                  placeholder="Email"
-                  value={email}
-                  required
-                  onChange={(e) => {
-                    setEmail(e.target.value)
-                  }}
-                  className="border px-5 py-1 rounded-full"/>
-                <input 
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  required
-                  onChange={(e) => {
-                    setPassword(e.target.value)
-                  }}
-                  className="border px-5 py-1 rounded-full"/>
-                  { page === "Signup" && <span className="text-sm text-gray-400 text-center">
-                    * Password must contain at least 6 characters. 
-                    </span> 
+      <section className="h-screen max-sm:h-[115vh] max-sm:w-[115vw] bg-sky-200">
+          <div className="flex flex-col gap-8 h-[90vh] items-center justify-center">
+            <form onSubmit={handleFormSubmit}>
+              <div className="flex flex-col m-5 gap-6 sm:gap-8 justify-center items-center border shadow-md bg-white p-5 sm:p-8 sm:pb-10 lg:min-w-[380px] rounded-md">
+                <div className="flex flex-col gap-1 text-[23px] font-semibold items-center">
+                  <h1> {page} to </h1> <Logo width={180} height={50}/>
+                </div>
+                <div className="flex flex-col gap-5 w-full text-base">
+                  {
+                    pathname === "/users/signup" && (
+                      <input 
+                        type="text"
+                        placeholder="Full Name"
+                        value={name}
+                        required
+                        onChange={(e) => {
+                          setName(e.target.value)
+                        }}
+                        className="border px-5 py-1 rounded-md"/>
+                    )
                   }
+                  <input 
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    required
+                    onChange={(e) => {
+                      setEmail(e.target.value)
+                    }}
+                    className="border px-5 py-1 rounded-md"/>
+                  <input 
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    required
+                    onChange={(e) => {
+                      setPassword(e.target.value)
+                    }}
+                    className="border px-5 py-1 rounded-md"/>
+                    { page === "Signup" && <span className="text-sm text-gray-400 text-center">
+                      * Password must contain at least 6 characters. 
+                      </span> 
+                    }
+                </div>
+                <button type="submit" className="w-full text-lg px-5 py-1 border rounded-md bg-sky-600 text-white hover:bg-sky-700">
+                  {page}
+                </button>
+                <div className="text-sm hover:underline hover:underline-offset-2">
+                  {
+                    pathname === "/users/login" ?
+                    <>
+                      <Link href={"/users/signup"}> Don't have an account? (Signup) </Link>
+                    </> : 
+                    <>
+                      <Link href={"/users/login"}> Already have an account? (Login) </Link>
+                    </>
+                  }
+                </div>
               </div>
-              <div className="w-full">
-                <Button name={page} type="submit"/>
-              </div>
-            </div>
-            <Toaster />
+              <Toaster />
+          </form>
         </div>
-      </form>
+      </section>
     )
   }
   

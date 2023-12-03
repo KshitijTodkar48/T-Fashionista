@@ -25,6 +25,8 @@ const ProductDetails = ({ params }) => {
       const data = await response.json();
 
       if (data) {
+        console.log(data);
+        
         setTitle(data.title);
         setDescription(data.description);
         setImageURL(data.imageURL);

@@ -22,23 +22,25 @@ export const DeliveryForm = () => {
         allowClear
       />
       <Space>
-        <Input
-          placeholder='Your city'
-          name='city'
-          prefix='City: '
-          required={true}
-          style={{ fontWeight: 'bold' }}
-          size='large'
-          allowClear
-        />
-        <InputNumber
-          placeholder='000000'
-          prefix='Zipcode: '
-          required={true}
-          style={{ fontWeight: 'bold' }}
-          size='large'
-          addonAfter="*"
-        />
+        <div className="flex flex-col gap-4 md:flex-row">
+            <Input
+              placeholder='Your city'
+              name='city'
+              prefix='City: '
+              required={true}
+              style={{ fontWeight: 'bold' }}
+              size='large'
+              allowClear
+            />
+            <InputNumber
+              placeholder='000000'
+              prefix='Zipcode: '
+              required={true}
+              style={{ fontWeight: 'bold' }}
+              size='large'
+              addonAfter="*"
+            />
+        </div>
       </Space>
     </section>
   )

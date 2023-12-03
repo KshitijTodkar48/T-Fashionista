@@ -1,5 +1,4 @@
 export * from "./LoginCard"
-export * from "./Button"
 export * from "./ProductCard"
 export * from "./OrangeButton"
 export * from "./Hero"

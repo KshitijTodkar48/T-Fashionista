@@ -1,6 +1,6 @@
-export const Logo = () => {
+export const Logo = ({width, height}: {width:number, height:number}) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="210px" height="50px" viewBox="0 0 500 140" style={{"cursor":"pointer"}}>
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 500 140" style={{"cursor":"pointer"}}>
       <path
         d="M0 0 C165 0 330 0 500 0 C500 44.88 500 89.76 500 136 C335 136 170 136 0 136 C0 91.12 0 46.24 0 0 Z "
         fill="#FDFDFD"

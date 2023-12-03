@@ -1,13 +1,15 @@
 "use client";
 import { Logo, SmallLogo, LogoutIcon, MyAccountIcon, OrdersIcon, ProfileIcon } from "../assets";
 import { Blackbutton } from "./Blackbutton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: string | undefined | null, route?: "users" | "admin"}) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleSignOut = async () => {
     await signOut({
@@ -20,7 +22,7 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
   return (
     <section className="w-full fixed top-0 bg-white flex items-center py-2 shadow-sm">
        <div className="sm:hidden"> <SmallLogo /> </div>
-       <div className="max-sm:hidden"> <Logo /> </div>
+       <div className="max-sm:hidden"> <Logo width={210} height={50} /> </div>
         <div className="flex justify-evenly items-center max-md:hidden md:w-[52%] lg:w-[60%] xl:w-[68%] text-xl font-semibold">
           <div className="cursor-pointer hover:text-orange-600" 
             onClick={() => {
@@ -37,7 +39,7 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
           <div className="cursor-pointer hover:text-orange-600 max-lg:hidden"> Contact us </div>
         </div>
         <div className="flex fixed right-0 items-center justify-end gap-2 mr-[1rem]">
-          {Id ? (
+          {session?.user ? (
             <>
               {
                 route === "users" ? 

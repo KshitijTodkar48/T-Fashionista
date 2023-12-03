@@ -13,7 +13,7 @@ export async function POST(request:NextRequest){
         return new NextResponse("Invalid data format" , { status: 400 });;
     }
 
-    const { email , password } = validatedData.data ;
+    const { name, email, password } = validatedData.data ;
     console.log(body) ;
 
     if(!email || !password)
@@ -36,6 +36,7 @@ export async function POST(request:NextRequest){
 
     const newUser = await prisma.user.create({
         data : {
+            name,
             email,
             hashedPassword
         }

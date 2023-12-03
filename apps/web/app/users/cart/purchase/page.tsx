@@ -1,4 +1,5 @@
 "use client";
+import "ui/styles.css"
 import {
   Button,
   Steps,
@@ -112,28 +113,29 @@ const PurchasePage = () => {
   };
 
   return (
-    <section className="m-10 border px-20 py-16 rounded-lg shadow-md">
-      <Steps
-        current={current}
-        items={[
-          {
-            title: "Details",
-            description: "Provide your details.",
-            icon:<FormOutlined style={{"fontSize":"50px"}}/>
-          },
-          {
-            title: "Payment",
-            description: "Select a payment option.",
-            icon:<CreditCardOutlined style={{"fontSize":"50px"}}/>
-          },
-          {
-            title: "Done",
-            description: "Order Placed.",
-            icon:<CheckCircleOutlined style={{"fontSize":"50px"}}/>
-          },
-        ]}
+    <section className="m-2 sm:m-10 border p-8 md:px-20 md:py-16 rounded-lg shadow-md">
+      <div className="max-md:hidden">
+        <Steps
+          current={current}
+          items={[
+            {
+              title: "Details",
+              description: "Provide your details.",
+              icon:<FormOutlined style={{"fontSize":"50px"}}/>
+            },
+            {
+              title: "Payment",
+              description: "Select a payment option.",
+              icon:<CreditCardOutlined style={{"fontSize":"50px"}}/>
+            },
+            {
+              title: "Done",
+              description: "Order Placed.",
+              icon:<CheckCircleOutlined style={{"fontSize":"50px"}}/>
+            },
+          ]}
       />
-
+      </div>
       <div>{component}</div>
 
       {current !== 2 ? (

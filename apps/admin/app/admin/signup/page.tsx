@@ -4,7 +4,7 @@ import { LoginCard } from "ui";
 const SignupPage = () => {
   return (
     <section>
-      <LoginCard page="Signup" name="T-Fashionista" route="admin"/>
+      <LoginCard page="Signup" route="admin"/>
     </section>
   )
 }

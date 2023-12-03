@@ -1,11 +1,11 @@
+"use client"
 import "ui/styles.css";
 import { Hero , Navbar , Products } from "ui";
-import { getServerSession } from "next-auth"
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { useSession } from "next-auth/react";
 
-export default async function Page() {
+export default function Page() {
   // @ts-ignore
-  const session = await getServerSession(authOptions) ;
+  const { data: session } = useSession();
   // @ts-ignore
   const userId = session?.user?.id ;
   const userEmail = session?.user?.email;

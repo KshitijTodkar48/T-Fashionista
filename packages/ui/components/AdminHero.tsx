@@ -1,23 +1,4 @@
-"use client"
-import { useState, useEffect } from "react";
-import { Loader } from "../assets";
-
 export const AdminHero = () => {
-  const [isLoading , setisLoading] = useState(true);
-  useEffect(() => {
-    // Manual loading for some specific issues.
-    setTimeout(() => { setisLoading(false) },1600);
-  },[])
-
-  if(isLoading)
-  {
-    return(
-        <section className="h-[70vh] flex justify-center items-center">
-          <Loader />
-        </section>
-    )
-  }
-
   return (
     <div className="flex flex-col items-center m-4">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold px-2">

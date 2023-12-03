@@ -58,7 +58,7 @@ const MyOrders = () => {
                 <> </> : 
                 <>
                    <div className="text-gray-400 text-2xl mt-4">
-                       Your cart is Empty !
+                       Your haven't ordered anything !
                    </div>
                 </>
             }

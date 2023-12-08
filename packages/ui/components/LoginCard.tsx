@@ -80,7 +80,13 @@ export const LoginCard = ({ page , route }: LoginCardProps) => {
               router.push("/");
             }
             else{
-              toast.error("Unable to Login !");
+              if(response?.status === 401)
+              {
+                toast.error("Invalid Credentials !");
+              }
+              else{
+                toast.error("Unable to Login !");
+              }
             }
         } catch (error) {
           // Handle network or unexpected errors.

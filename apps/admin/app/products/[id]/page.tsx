@@ -3,8 +3,8 @@ import "ui/styles.css";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
-import { ImageSkeleton } from "ui";
-import { Input, Form, Switch } from "antd";
+import { ImageSkeleton, OrderedByCard } from "ui";
+import { Input, Form, Switch, Divider } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { productDetailsSchema } from "zod-schemas";
 
@@ -14,6 +14,7 @@ const ProductDetails = ({ params }) => {
   const [imageURL, setImageURL] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [published, setPublished] = useState<boolean>(false);
+  const [buyers, setBuyers] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { data: session } = useSession();
   // @ts-ignore
@@ -32,6 +33,7 @@ const ProductDetails = ({ params }) => {
         setImageURL(data.imageURL);
         setPrice(data.price);
         setPublished(data.published);
+        setBuyers(data.orderedBy);
       }
       setIsLoading(false);
     };
@@ -69,7 +71,7 @@ const ProductDetails = ({ params }) => {
   };
 
   return (
-    <section className="w-full flex justify-center lg:mt-10">
+    <section className="w-full flex flex-col justify-center lg:mt-10">
       <section className="flex flex-col lg:flex-row w-full justify-center items-center gap-3 p-5 my-8 max-w-[1530px]">
         <div className="w-4/5 sm:w-3/5 md:w-2/5 flex justify-center mb-8">
           {isLoading ? (
@@ -150,6 +152,17 @@ const ProductDetails = ({ params }) => {
         </div>
       </section>
       <Toaster />
+      {
+        buyers && 
+        <section className="w-[90%] sm:w-4/5 flex flex-col justify-center gap-3 mx-3 lg:mx-40 sm:mx-20 mt-4 mb-8">
+        <div className="text-3xl font-semibold"> Orders: </div>
+        <div className="flex flex-col gap-3 max-w-[1250px]">
+          {
+             buyers.map((buyer:any) => <div key={buyer.id}> <OrderedByCard {...buyer} /> </div>)
+          }
+        </div>
+        </section>
+      }
     </section>
   );
 };

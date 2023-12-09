@@ -33,10 +33,15 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
           <div className="cursor-pointer hover:text-orange-600" 
             onClick={() => {
             const anchor = document.querySelector('#Products')
-            anchor?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            anchor?.scrollIntoView({ behavior: 'smooth', block: 'start' })
            }}> Products
           </div>
-          <div className="cursor-pointer hover:text-orange-600 max-lg:hidden"> Contact us </div>
+          <div className="cursor-pointer hover:text-orange-600 max-lg:hidden"
+            onClick={() => {
+            const anchor = document.querySelector('#Footer')
+            anchor?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+           }}
+          > Contact us </div>
         </div>
         <div className="flex fixed right-0 items-center justify-end gap-2 mr-[1rem]">
           {session?.user ? (

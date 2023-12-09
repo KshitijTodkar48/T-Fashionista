@@ -2,6 +2,7 @@
 import "ui/styles.css";
 import { Hero , Navbar , Products } from "ui";
 import { useSession } from "next-auth/react";
+import { Footer } from "ui";
 
 export default function Page() {
   // @ts-ignore
@@ -11,12 +12,15 @@ export default function Page() {
   const userEmail = session?.user?.email;
   
   return (
-    <main className="flex flex-col items-center">
-      <Navbar Id={userId} Email={userEmail} route="users"/>
-      <div className="mt-[78px]" id="Home">
-        <Hero />
-      </div>
-      <Products userId={userId}/>
+    <main>
+      <section className="flex flex-col items-center">
+        <Navbar Id={userId} Email={userEmail} route="users"/>
+        <div className="mt-[85px]" id="Home">
+          <Hero />
+        </div>
+        <Products userId={userId}/>
+      </section>
+      <Footer/>
     </main>
   );
 }

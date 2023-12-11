@@ -41,6 +41,13 @@ const ProductDetails = ({ params }) => {
   }, [userId]);
 
   const updateDetails = async () => {
+    // Check if required fields are not empty.
+    if (!title || !description || !imageURL || !price.toString()) {
+      toast("Please fill in all required fields.", {
+        icon: '❗'
+      });
+      return;
+    }
     try {
       const validatedData = productDetailsSchema.safeParse({ title, description, imageURL, price, published });
         if(!validatedData.success)
@@ -92,6 +99,7 @@ const ProductDetails = ({ params }) => {
                 value={title}
                 style={{ fontWeight: "normal" }}
                 showCount
+                required
                 maxLength={30}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -101,6 +109,7 @@ const ProductDetails = ({ params }) => {
                 placeholder="Description"
                 value={description}
                 showCount
+                required
                 maxLength={300}
                 size="large"
                 style={{
@@ -116,6 +125,7 @@ const ProductDetails = ({ params }) => {
               <Input
                 placeholder="ImageURL"
                 value={imageURL}
+                required
                 style={{ fontWeight: "normal" }}
                 onChange={(e) => setImageURL(e.target.value)}
               />
@@ -124,6 +134,7 @@ const ProductDetails = ({ params }) => {
               <Input
                 placeholder="Price"
                 value={price}
+                required
                 style={{ fontWeight: "normal" }}
                 onChange={(e) => setPrice(e.target.value)}
               />

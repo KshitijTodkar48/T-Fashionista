@@ -88,7 +88,7 @@ const AddProductPage = () => {
   }
 
   return (
-    <section className="w-full flex justify-center lg:mt-10">
+    <section className="w-full flex justify-center lg:mt-20">
     <div className="w-4/5 md:w-2/5 flex flex-col max-lg:items-center gap-4">
           <Form size="large" style={{ fontWeight: "bold" }}>
             <Form.Item label="Title">
@@ -97,6 +97,7 @@ const AddProductPage = () => {
                 value={title}
                 style={{ fontWeight: "normal" }}
                 showCount
+                required
                 maxLength={40}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -106,6 +107,7 @@ const AddProductPage = () => {
                 placeholder="Description"
                 value={description}
                 showCount
+                required
                 maxLength={300}
                 size="large"
                 style={{
@@ -121,6 +123,7 @@ const AddProductPage = () => {
               <Input
                 placeholder="ImageURL"
                 value={imageURL}
+                required
                 style={{ fontWeight: "normal" }}
                 onChange={(e) => setImageURL(e.target.value)}
               />
@@ -129,6 +132,7 @@ const AddProductPage = () => {
               <Input
                 placeholder="Price"
                 value={price}
+                required
                 style={{ fontWeight: "normal" }}
                 onChange={(e) => setPrice(e.target.value)}
               />

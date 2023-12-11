@@ -81,11 +81,14 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
             <div className="px-10 py-2 flex justify-center items-center cursor-pointer hover:bg-slate-200">
               <MyAccountIcon />  <span className="w-2/3 pl-8">My Account</span>
             </div>
-            <div className="px-10 py-2 flex justify-center items-center cursor-pointer hover:bg-slate-200"
-              onClick={() => { router.push("/users/orders"); }}
-            >
-              <OrdersIcon />  <span className="w-2/3 pl-8">My Orders</span>
-            </div>
+            {
+               route === "users" && 
+               <div className="px-10 py-2 flex justify-center items-center cursor-pointer hover:bg-slate-200"
+                  onClick={() => { router.push("/users/orders"); }}
+                >
+                  <OrdersIcon />  <span className="w-2/3 pl-8">My Orders</span>
+                </div>
+            }
             <div 
               className="px-10 py-2 flex justify-center text-center cursor-pointer hover:bg-slate-200"
               onClick={() => {

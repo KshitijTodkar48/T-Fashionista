@@ -35,7 +35,7 @@ const PurchasePage = () => {
            getCartItems() ;
         }
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
 } , [userId])
 
@@ -99,7 +99,6 @@ const PurchasePage = () => {
       });
   
       if (response.ok) {
-        console.log("Cart emptied successfully.");
         cartItems.forEach((item) => {
           localStorage.removeItem(`is${item.id.toString()}Addedfor-${userId}`);
         })

@@ -9,7 +9,6 @@ import toast, { Toaster } from "react-hot-toast"
 export const ProductCard = ({ imageURL , title , rating , price , id , userId } : ProductType) => {
 
   const [isAddedToCart , setIsAddedToCart] = useState<boolean>(false);
-  const notify = () => toast.success("Item added to Cart.");
   const router = useRouter();
 
   useEffect(() => {
@@ -24,6 +23,7 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
   } , [userId])
 
   const addToCart = async (productId: Number, userId: string) => {
+    toast.success("Item added to Cart.") ;
     setIsAddedToCart(true);
     const response = await fetch(`/api/products/addToCart`,{
       method: "POST",
@@ -38,15 +38,13 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
     try {
       if(response.ok)
       {
-        // alert("Item added to cart.")
         localStorage.setItem(`is${productId}Addedfor-${userId}`, "added") ;
       }
       else{
-        alert("Something went wrong.")
+       toast.error("Something went wrong.")
       }
     } catch (error) {
-      console.log(error);
-      alert("An error occured.")
+      toast.error("An error occured.")
     }
   }
   return (
@@ -73,7 +71,6 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
                 if(!isAddedToCart)
                 {
                   addToCart(id,userId) ;
-                  notify() ;
                 }
               }
               else{

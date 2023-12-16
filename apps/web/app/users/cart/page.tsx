@@ -38,11 +38,9 @@ const Cart = () => {
 
     useEffect(() => {
         try {
-            console.log("UserID: " + userId);
             const displayCartItems = async () => {
                 const response = await fetch(`/api/users/${userId}/cart`);
                 const data = await response?.json();
-                console.log(data);
                 setProducts(data.cartItems);
                 setIsLoading(false);
                 calculateTotal();
@@ -59,7 +57,6 @@ const Cart = () => {
     const calculateTotal = () => {
         let totalCost = products.reduce((accumulator, product) => { return accumulator + parseFloat(product.price) } , 0) ;
         totalCost = parseFloat(totalCost.toFixed(2)) ;
-        console.log(totalCost) ;
         setTotal(totalCost) ;
     }
 

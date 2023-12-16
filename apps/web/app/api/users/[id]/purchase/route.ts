@@ -20,7 +20,6 @@ export const POST = async(req: NextRequest, { params }) => {
         return NextResponse.json(updatedUser);
 
       } catch (error) {
-        console.log("Error placing order: ", error);
         return new NextResponse("An error occurred.", { status: 500 });
       }
 }

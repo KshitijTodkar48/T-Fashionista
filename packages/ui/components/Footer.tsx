@@ -232,7 +232,7 @@ export const Footer = () => {
 
               <li>
                 <a
-                  href="https://github.com/KshitijTodkar48"
+                  href="https://github.com/KshitijTodkar48/T-Fashionista"
                   target="_blank"
                   rel="noreferrer"
                   className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"

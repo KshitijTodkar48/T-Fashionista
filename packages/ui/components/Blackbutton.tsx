@@ -20,7 +20,7 @@ export const Blackbutton = ({ name, route }: ButtonProps) => {
   {
     return(
         <button
-            className="flex items-center gap-3 text-base lg:text-lg px-5 py-1 border rounded-full bg-black text-white font-[500]"
+            className="flex items-center gap-3 text-base lg:text-lg px-5 py-1 border rounded-full hover:rounded-lg bg-black text-white font-[500]"
             onClick={handleClick}
             >
             <div className="block max-sm:hidden"> {name} </div> <CartIcon />

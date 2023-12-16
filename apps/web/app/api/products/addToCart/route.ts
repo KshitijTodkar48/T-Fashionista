@@ -43,8 +43,6 @@ export const POST = async (request:NextRequest) => {
         return NextResponse.json(updatedUser);
 
       } catch (error) {
-        console.log(error);
-        
         return new NextResponse("An error occured.", { status: 500 });
       }
 }

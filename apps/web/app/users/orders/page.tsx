@@ -15,11 +15,9 @@ const MyOrders = () => {
 
     useEffect(() => {
         try {
-            console.log("UserID: " + userId);
             const displayOrderedItems = async () => {
                 const response = await fetch(`/api/users/${userId}/myOrders`);
                 const data = await response?.json();
-                console.log(data);
                 setProducts(data.orderedItems);
                 setIsLoading(false);
             }

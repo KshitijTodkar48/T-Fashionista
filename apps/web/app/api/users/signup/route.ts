@@ -14,7 +14,6 @@ export async function POST(request:NextRequest){
     }
 
     const { name, email, password } = validatedData.data ;
-    console.log(body) ;
 
     if(!email || !password)
     {

@@ -49,7 +49,6 @@ export const POST = async(req: NextRequest, { params }) =>
         return NextResponse.json(newProduct) ;
 
     } catch (error) {
-        console.log(error);
         return new NextResponse("Internal Server Error", { status: 500 });
     }
 }

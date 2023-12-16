@@ -9,7 +9,7 @@ export default function Page() {
   // @ts-ignore
   const adminId = session?.user?.id ;
   const adminEmail = session?.user?.email;
-  console.log(adminId);
+  (adminId);
   
   
   return (

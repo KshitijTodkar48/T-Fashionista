@@ -19,7 +19,10 @@ export const PublishedProducts = ({ Id }:{ Id: string | undefined }) => {
             console.log(error);
           }
         }
-        if(Id) fetchProducts() ;
+        if(Id)
+        {
+          fetchProducts() ;
+        }
       } , [Id])
 
     if(isLoading)

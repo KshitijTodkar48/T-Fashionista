@@ -15,9 +15,9 @@ export const Hero = () => {
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
                 <img className="w-[250px] h-[400px] xl:w-[315px] xl:h-[500px] rounded-xl" 
-                src="https://img.mensxp.com/media/shop/catalog/products/N/718146/navy-blue-and-orange-colorblocked-cotton-half-sleeve-t-shirt-273616-default.jpg" alt="Image-1" />
+                src="https://img.mensxp.com/media/shop/catalog/products/N/718146/navy-blue-and-orange-colorblocked-cotton-half-sleeve-t-shirt-273616-default.jpg" alt="T-Shirt" />
                 <img className="w-[250px] h-[400px] xl:w-[315px] xl:h-[500px] rounded-xl"
-                src="https://i.pinimg.com/originals/63/66/ae/6366ae326c5d497cc73ce0876c34efa5.jpg" alt="Image-2" />
+                src="https://i.pinimg.com/originals/63/66/ae/6366ae326c5d497cc73ce0876c34efa5.jpg" alt="T-Shirt" />
             </div>
         </section>
     )

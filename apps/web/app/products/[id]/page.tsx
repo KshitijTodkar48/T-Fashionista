@@ -40,7 +40,7 @@ const ProductDetails = ({ params }) => {
             fetchProductDetails();
         }, [userId])
 
-        const addToCart = async (userId: string) => {
+        const addToCart = async (UserId: string) => {
             const productId = parseInt(params?.id) ;
             setIsAddedToCart(true);
             const response = await fetch(`/api/products/addToCart`,{
@@ -50,20 +50,20 @@ const ProductDetails = ({ params }) => {
               },
               body: JSON.stringify({
                 productId,
-                userId
+                UserId
               })
             })
             try {
               if(response.ok)
               {
                 // alert("Item added to cart.")
-                localStorage.setItem(`is${productId}Addedfor-${userId}`, "added") ;
+                localStorage.setItem(`is${productId}Addedfor-${UserId}`, "added") ;
               }
               else{
-                alert("Something went wrong.")
+                toast.error("Something went wrong.")
               }
             } catch (error) {
-              alert("An error occured.")
+              toast.error("An error occured.")
             }
           }
 
@@ -71,7 +71,7 @@ const ProductDetails = ({ params }) => {
         <section className="w-full flex justify-center">
             <section className="flex flex-col lg:flex-row w-full justify-center items-center p-5 my-8 max-w-[1530px]">
                 <div className="w-4/5 md:w-1/2 flex justify-center mb-8">
-                  { isLoading ? <ImageSkeleton /> :  <img src={product?.imageURL} className="rounded-2xl w-[90%] max-h-[600px]" alt="Product Image" />}
+                  { isLoading ? <ImageSkeleton /> :  <img src={product?.imageURL} alt="" className="rounded-2xl w-[90%] max-h-[600px]" />}
                 </div>
                 <div className="w-4/5 md:w-1/2 flex flex-col max-lg:items-center gap-4">
                     <h1 className="text-2xl xl:text-5xl font-bold"> {product?.title} </h1>
@@ -104,8 +104,8 @@ const ProductDetails = ({ params }) => {
                         {
                             if(!isAddedToCart)
                             {
-                            addToCart(userId) ;
-                            notify() ;
+                              addToCart(userId) ;
+                              notify() ;
                             }
                         }
                         else{

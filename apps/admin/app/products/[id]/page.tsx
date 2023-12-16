@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
 import { ImageSkeleton, OrderedByCard } from "ui";
-import { Input, Form, Switch, Divider } from "antd";
+import { Input, Form, Switch } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { productDetailsSchema } from "zod-schemas";
 
@@ -84,8 +84,8 @@ const ProductDetails = ({ params }) => {
           ) : (
             <img
               src={imageURL}
+              alt=""
               className="rounded-2xl w-[90%] max-h-[600px]"
-              alt="Product Image"
             />
           )}
         </div>
@@ -99,7 +99,7 @@ const ProductDetails = ({ params }) => {
                 showCount
                 required
                 maxLength={30}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => {setTitle(e.target.value)}}
               />
             </Form.Item>
             <Form.Item label="Description">
@@ -116,7 +116,7 @@ const ProductDetails = ({ params }) => {
                   fontWeight: "normal",
                   fontSize: "16px"
                 }}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => {setDescription(e.target.value)}}
               />
             </Form.Item>
             <Form.Item label="ImageURL">
@@ -125,7 +125,7 @@ const ProductDetails = ({ params }) => {
                 value={imageURL}
                 required
                 style={{ fontWeight: "normal" }}
-                onChange={(e) => setImageURL(e.target.value)}
+                onChange={(e) => {setImageURL(e.target.value)}}
               />
             </Form.Item>
             <Form.Item label="Price">
@@ -134,13 +134,13 @@ const ProductDetails = ({ params }) => {
                 value={price}
                 required
                 style={{ fontWeight: "normal" }}
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => {setPrice(e.target.value)}}
               />
             </Form.Item>
             <Form.Item label="Published">
               <Switch
                 checked={published}
-                onChange={(check) => setPublished(check)}
+                onChange={(check) => {setPublished(check)}}
                 style={
                   published
                     ? { backgroundColor: "rgb(255,111,0)" }

@@ -10,7 +10,7 @@ export const AdminProductCard = ({ imageURL, title, rating, price, id }: Product
       <div>
         <img
           src={imageURL}
-          alt="T-shirt image"
+          alt="T-Shirt"
           className="h-[250px] w-[250px] rounded-2xl border"
         />
       </div>

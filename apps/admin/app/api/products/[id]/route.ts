@@ -2,6 +2,7 @@ import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 import { productDetailsSchema } from "zod-schemas";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const GET = async(req: NextRequest , { params }) => {
     const productId = parseInt(params.id);
     try { 

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 "use client";
 import "ui/styles.css"
 import {
@@ -49,7 +50,7 @@ const PurchasePage = () => {
             status="success"
             title={`Successfully Purchased`}
             extra={[
-              <Button style={orangeButtonStyle} type="primary" onClick={() => router.push('../../')}>
+              <Button key={"Shop-more"} style={orangeButtonStyle} type="primary" onClick={() => { router.push('../../') }}>
                 Shop More
               </Button>,
             ]}
@@ -139,7 +140,7 @@ const PurchasePage = () => {
 
       {current !== 2 ? (
         <div className="mt-8 flex gap-5">
-          {current != 0 ? <Button style={okButtonStyle} type="primary" onClick={goPrev}>Previous</Button> : ""}
+          {current !== 0 ? <Button style={okButtonStyle} type="primary" onClick={goPrev}>Previous</Button> : ""}
           <Button style={okButtonStyle} type="primary" onClick={goNext}>
             Next
           </Button>

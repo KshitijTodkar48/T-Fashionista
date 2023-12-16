@@ -99,7 +99,7 @@ const AddProductPage = () => {
                 showCount
                 required
                 maxLength={40}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => {setTitle(e.target.value)}}
               />
             </Form.Item>
             <Form.Item label="Description">
@@ -116,7 +116,7 @@ const AddProductPage = () => {
                   fontWeight: "normal",
                   fontSize: "16px"
                 }}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => {setDescription(e.target.value)}}
               />
             </Form.Item>
             <Form.Item label="ImageURL">
@@ -125,7 +125,7 @@ const AddProductPage = () => {
                 value={imageURL}
                 required
                 style={{ fontWeight: "normal" }}
-                onChange={(e) => setImageURL(e.target.value)}
+                onChange={(e) => {setImageURL(e.target.value)}}
               />
             </Form.Item>
             <Form.Item label="Price">
@@ -134,13 +134,13 @@ const AddProductPage = () => {
                 value={price}
                 required
                 style={{ fontWeight: "normal" }}
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => {setPrice(e.target.value)}}
               />
             </Form.Item>
             <Form.Item label="Published">
               <Switch
                 checked={published}
-                onChange={(check) => setPublished(check)}
+                onChange={(check) => {setPublished(check)}}
                 style={
                   published
                     ? { backgroundColor: "rgb(255,111,0)" }

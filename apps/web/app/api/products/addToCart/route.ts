@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request:NextRequest) => {
     const body = await request.json();
-    const { userId, productId } = body;
+    const { UserId, productId } = body;
+    const userId = UserId;
     try {
         // First, fetch the user to get their current cart items.
         const user = await prisma.user.findUnique({
@@ -43,6 +44,8 @@ export const POST = async (request:NextRequest) => {
         return NextResponse.json(updatedUser);
 
       } catch (error) {
+        console.log(error);
+        
         return new NextResponse("An error occured.", { status: 500 });
       }
 }

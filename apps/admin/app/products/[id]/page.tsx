@@ -23,7 +23,7 @@ const ProductDetails = ({ params }) => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       const response = await fetch(`/api/products/${params?.id}`);
-      const data = await response.json();
+      const data = await response?.json();
 
       if (data) {
         setTitle(data.title);
@@ -41,7 +41,7 @@ const ProductDetails = ({ params }) => {
   const updateDetails = async () => {
     // Check if required fields are not empty.
     if (!title || !description || !imageURL || !price.toString()) {
-      toast("Please fill in all required fields.", {
+      toast("Please fill in all the required fields.", {
         icon: '❗'
       });
       return;

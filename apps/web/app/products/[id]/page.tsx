@@ -40,7 +40,7 @@ const ProductDetails = ({ params }) => {
             fetchProductDetails();
         }, [userId])
 
-        const addToCart = async (UserId: string) => {
+        const addToCart = async (Id: string) => {
             const productId = parseInt(params?.id) ;
             setIsAddedToCart(true);
             const response = await fetch(`/api/products/addToCart`,{
@@ -50,29 +50,37 @@ const ProductDetails = ({ params }) => {
               },
               body: JSON.stringify({
                 productId,
-                UserId
+                Id
               })
             })
             try {
               if(response.ok)
               {
                 // alert("Item added to cart.")
-                localStorage.setItem(`is${productId}Addedfor-${UserId}`, "added") ;
+                localStorage.setItem(`is${productId}Addedfor-${Id}`, "added") ;
               }
               else{
-                toast.error("Something went wrong.")
+                toast.error("Something went wrong.");
+                localStorage.removeItem(`is${productId}Addedfor-${Id}`);
               }
             } catch (error) {
-              toast.error("An error occured.")
+              toast.error("An error occured.");
+              localStorage.removeItem(`is${productId}Addedfor-${Id}`);
             }
           }
 
     return(
         <section className="w-full flex justify-center">
             <section className="flex flex-col lg:flex-row w-full justify-center items-center p-5 my-8 max-w-[1530px]">
-                <div className="w-4/5 md:w-1/2 flex justify-center mb-8">
-                  { isLoading ? <ImageSkeleton /> :  <img src={product?.imageURL} alt="" className="rounded-2xl w-[90%] max-h-[600px]" />}
-                </div>
+                {
+                  isLoading ? 
+                  <div className="w-4/5 md:w-[35%] flex justify-center mb-8">
+                    <ImageSkeleton />
+                  </div> :
+                  <div className="w-4/5 md:w-1/2 flex justify-center mb-8">
+                    <img src={product?.imageURL} alt="" className="rounded-2xl w-[90%] max-h-[600px]" />
+                  </div>
+                }
                 <div className="w-4/5 md:w-1/2 flex flex-col max-lg:items-center gap-4">
                     <h1 className="text-2xl xl:text-5xl font-bold"> {product?.title} </h1>
                     <h2 className="text-xl xl:text-3xl text-gray-500 font-semibold flex items-center gap-3"> Ratings : <div className="flex items-center gap-2 pt-1"> <StarIconLarge /> <span className="font-bold text-black"> {product?.rating} </span> </div> </h2>

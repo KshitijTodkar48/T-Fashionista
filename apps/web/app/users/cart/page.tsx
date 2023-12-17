@@ -106,8 +106,8 @@ const Cart = () => {
                     </Button>
                     <Modal okText="Place Order" okButtonProps={{style:okButtonStyle}} cancelButtonProps={{style:cancelButtonStyle}} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                         <div className="flex flex-col gap-6 mb-8">
-                            <p className="text-[23px] text-orange-600 font-semibold">Are you sure ?</p>
-                            <p className="text-[27px] text-gray-600">Your total : <span className="font-semibold text-black"> {total} $ </span></p>
+                            <p className="text-[20px] sm:text-[23px] text-orange-600 font-semibold">Are you sure ?</p>
+                            <p className="text-[24px] sm:text-[27px] text-gray-600">Your total : <span className="font-semibold text-black"> {total} $ </span></p>
                         </div>
                     </Modal>
                 </> : 

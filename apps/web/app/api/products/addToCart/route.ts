@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request:NextRequest) => {
     const body = await request.json();
-    const { UserId, productId } = body;
-    const userId = UserId;
+    const { Id, productId } = body;
+    const userId = Id;
     try {
         // First, fetch the user to get their current cart items.
         const user = await prisma.user.findUnique({

@@ -14,7 +14,7 @@ const ProductDetails = ({ params }) => {
   const [imageURL, setImageURL] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [published, setPublished] = useState<boolean>(false);
-  const [buyers, setBuyers] = useState<any>(null);
+  const [buyers, setBuyers] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { data: session } = useSession();
   // @ts-ignore
@@ -78,17 +78,19 @@ const ProductDetails = ({ params }) => {
   return (
     <section className="w-full flex flex-col justify-center lg:mt-10">
       <section className="flex flex-col lg:flex-row w-full justify-center items-center gap-3 p-5 my-8 max-w-[1530px]">
-        <div className="w-4/5 sm:w-3/5 md:w-2/5 flex justify-center mb-8">
-          {isLoading ? (
-            <ImageSkeleton />
-          ) : (
-            <img
-              src={imageURL}
-              alt=""
-              className="rounded-2xl w-[90%] max-h-[600px]"
-            />
-          )}
-        </div>
+        {
+           isLoading ? 
+           <div className="w-4/5 sm:w-3/5 md:w-[35%] flex justify-center mb-8">
+              <ImageSkeleton />
+           </div> :
+           <div className="w-4/5 sm:w-3/5 md:w-2/5 flex justify-center mb-8">
+              <img
+                src={imageURL}
+                alt=""
+                className="rounded-2xl w-[90%] max-h-[600px]"
+              />
+            </div>
+        }
         <div className="w-4/5 md:w-2/5 flex flex-col max-lg:items-center gap-4">
           <Form size="large" style={{ fontWeight: "bold" }}>
             <Form.Item label="Title">
@@ -162,7 +164,7 @@ const ProductDetails = ({ params }) => {
       </section>
       <Toaster />
       {
-        buyers && 
+        buyers.length !== 0 && 
         <section className="w-[90%] sm:w-4/5 flex flex-col justify-center gap-3 mx-3 lg:mx-40 sm:mx-20 mt-4 mb-8">
         <div className="text-3xl font-semibold"> Orders: </div>
         <div className="flex flex-col gap-3 max-w-[1250px]">

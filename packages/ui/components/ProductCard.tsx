@@ -22,7 +22,7 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
     }
   } , [userId])
 
-  const addToCart = async (productId: Number, userId: string) => {
+  const addToCart = async (productId: Number, Id: string) => {
     toast.success("Item added to Cart.") ;
     setIsAddedToCart(true);
     const response = await fetch(`/api/products/addToCart`,{
@@ -32,19 +32,21 @@ export const ProductCard = ({ imageURL , title , rating , price , id , userId } 
       },
       body: JSON.stringify({
         productId,
-        userId
+        Id
       })
     })
     try {
       if(response.ok)
       {
-        localStorage.setItem(`is${productId}Addedfor-${userId}`, "added") ;
+        localStorage.setItem(`is${productId}Addedfor-${Id}`, "added") ;
       }
       else{
-       toast.error("Something went wrong.")
+       toast.error("Something went wrong.") ;
+       localStorage.removeItem(`is${productId}Addedfor-${Id}`) ;
       }
     } catch (error) {
-      toast.error("An error occured.")
+      toast.error("An error occured.") ;
+      localStorage.removeItem(`is${productId}Addedfor-${Id}`) ;
     }
   }
   return (

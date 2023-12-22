@@ -1,7 +1,7 @@
 import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 
-export const POST = async(req: NextRequest, { params }) => {
+export const POST = async(req: NextRequest, { params }): Promise<NextResponse> => {
     const userId = params.id;
     const body = await req.json();
     const orderedItemsIds = body.cartItemsIds; // Array of ID's of ordered products.

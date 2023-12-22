@@ -2,7 +2,7 @@ import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const POST = async (req: NextRequest, { params }) => {
+export const POST = async (req: NextRequest, { params }): Promise<NextResponse> => {
   const userId = params.id;
 
   try {

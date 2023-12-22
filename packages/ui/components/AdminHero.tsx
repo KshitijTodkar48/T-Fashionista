@@ -1,8 +1,8 @@
 export const AdminHero = () => {
   return (
     <div className="flex flex-col items-center m-4">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold px-2">
-          Welcome to <span className="text-orange-500"> T-Fashonista </span>'s
+        <h1 className="text-3xl md:text-4xl font-bold px-2">
+          Welcome to <span className="text-orange-500"> <br className="sm:hidden"/> T-Fashonista </span>'s <br className="sm:hidden"/>
           Seller Dashboard
         </h1>
       <div className="container mx-auto my-8">

@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: string | undefined | null, route?: "users" | "admin"}) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const handleSignOut = async () => {
     await signOut({
@@ -43,9 +43,10 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
            }}
           > Contact us </div>
         </div>
-        <div className="flex fixed right-0 items-center justify-end gap-2 mr-[1rem]">
-          {session?.user ? (
-            <>
+        { !(status === "loading") && 
+          (<div className="flex fixed right-0 items-center justify-end gap-2 mr-[1rem]">
+           {session?.user ? (
+             <>
               {
                 route === "users" ? 
                 <>
@@ -60,16 +61,17 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
                   setToggleDropdown((current) => !current);
                 }}
               >
-                <ProfileIcon />
-              </div>
-            </>
-          ) : (
-            <>
+                  <ProfileIcon />
+                </div>
+              </>
+            ) : (
+             <>
               <div className="h-10"><Blackbutton name="Login" route={route} /></div>
               <div className="h-10"><Blackbutton name="Signup" route={route} /></div>
-            </>
-          )}
-        </div>
+             </>
+           )}
+         </div>)
+        }
         {toggleDropdown && (
           <div
             className="fixed top-[61px] right-2 w-[18rem] sm:w-[20rem] bg-white shadow-md rounded-lg text-lg font-semibold"

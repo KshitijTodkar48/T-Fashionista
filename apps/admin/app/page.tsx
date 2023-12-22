@@ -1,17 +1,24 @@
 "use client"
 import "ui/styles.css";
-import { AdminHero, Dashboard, Navbar, PublishedProducts, Footer } from "ui";
+import { AdminHero, Dashboard, Navbar, PublishedProducts, Footer, Loader } from "ui";
 import { useSession } from "next-auth/react";
 
 export default function Page() {
   // @ts-ignore
-  const { data: session } = useSession();
+  const { data: session, status } = useSession(
+  );
   // @ts-ignore
   const adminId = session?.user?.id ;
   const adminEmail = session?.user?.email;
-  (adminId);
-  
-  
+ 
+  if (status === "loading") {
+    return (
+      <section className="h-[85vh] flex justify-center">
+        <Loader/>
+      </section>
+    );
+  }
+
   return (
     <main>
       <section className="flex flex-col items-center">

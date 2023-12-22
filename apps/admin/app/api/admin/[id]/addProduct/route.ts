@@ -2,7 +2,7 @@ import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 import { productDetailsSchema } from "zod-schemas";
 
-export const POST = async(req: NextRequest, { params }) =>
+export const POST = async(req: NextRequest, { params }): Promise<NextResponse> =>
 {
     try {
         const adminId = params.id;
@@ -12,7 +12,7 @@ export const POST = async(req: NextRequest, { params }) =>
         const validatedData = productDetailsSchema.safeParse(body);
         if(!validatedData.success)
         {
-            return new NextResponse("Invalid data format" , { status: 400 });;
+            return new NextResponse("Invalid data format" , { status: 400 });
         }
 
         const { title, description, imageURL, price, published } = validatedData.data ;
@@ -42,7 +42,7 @@ export const POST = async(req: NextRequest, { params }) =>
                 published,
                 publishedBy: {
                     connect: { id: admin.id },
-                  },
+                },
             }
         })
         

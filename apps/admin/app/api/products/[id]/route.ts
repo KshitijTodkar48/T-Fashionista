@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { productDetailsSchema } from "zod-schemas";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const GET = async(req: NextRequest , { params }) => {
+export const GET = async(req: NextRequest , { params }): Promise<NextResponse> => {
     const productId = parseInt(params.id);
     try { 
         const product = await prisma.product.findUnique({

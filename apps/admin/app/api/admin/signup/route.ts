@@ -3,7 +3,8 @@ import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 import { signupFormSchema } from "zod-schemas";
 
-export async function POST(request:NextRequest){
+export async function POST(request:NextRequest): Promise<NextResponse>
+{
     const body = await request.json() ;
 
     // Zod input-validation

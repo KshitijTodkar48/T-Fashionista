@@ -1,9 +1,9 @@
 export const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-gray-900" id="Footer">
+    <footer className="bg-gray-900" id="Footer">
       <div className="mx-auto max-w-screen-xl px-4 pt-[6rem] pb-16 sm:px-6 lg:px-8">
         <div className="lg:flex lg:items-start lg:gap-8">
-          <div className="text-orange-600 dark:text-orange-400">
+          <div className="text-orange-400">
             <svg
               className="h-8"
               viewBox="0 0 28 24"
@@ -20,11 +20,11 @@ export const Footer = () => {
           <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16">
             <div className="col-span-2">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h2 className="text-2xl font-bold text-white">
                     Get our exclusive updates!
                 </h2>
 
-                <p className="mt-4 text-gray-500 dark:text-gray-400">
+                <p className="mt-4 text-gray-400">
                     Subscribe to our newsletter for exclusive updates on the latest t-shirt designs, promotions, and style inspirations straight to your inbox!
                 </p>
               </div>
@@ -37,12 +37,12 @@ export const Footer = () => {
                   Email{" "}
                 </label>
 
-                <div className="border-2 border-gray-100 focus-within:ring dark:border-gray-800 sm:flex sm:items-center sm:gap-4">
+                <div className="border-2 focus-within:ring border-gray-800 sm:flex sm:items-center sm:gap-4">
                   <input
                     type="email"
                     id="UserEmail"
                     placeholder="john@example.com"
-                    className="w-full px-3 border-none focus:border-transparent focus:ring-transparent dark:bg-gray-900 dark:text-white sm:text-sm"
+                    className="w-full px-3 border-none focus:border-transparent focus:ring-transparent bg-gray-900 text-white sm:text-sm"
                   />
 
                   <button className="mt-1 w-full bg-orange-600 px-4 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-[rgb(255,119,0)] sm:mt-0 sm:w-auto sm:shrink-0">
@@ -53,14 +53,14 @@ export const Footer = () => {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="font-medium text-gray-900 dark:text-white">
+              <p className="font-medium text-white">
                 Company
               </p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     About
                   </a>
@@ -68,7 +68,7 @@ export const Footer = () => {
 
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     Terms of Service
                   </a>
@@ -78,14 +78,14 @@ export const Footer = () => {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="font-medium text-gray-900 dark:text-white">
+              <p className="font-medium text-white">
                 Helpful Links
               </p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     FAQs
                   </a>
@@ -93,7 +93,7 @@ export const Footer = () => {
 
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     Support
                   </a>
@@ -101,7 +101,7 @@ export const Footer = () => {
 
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     Contact
                   </a>
@@ -111,12 +111,12 @@ export const Footer = () => {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="font-medium text-gray-900 dark:text-white">Legal</p>
+              <p className="font-medium text-white">Legal</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     Accessibility
                   </a>
@@ -124,7 +124,7 @@ export const Footer = () => {
 
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     Returns Policy
                   </a>
@@ -132,7 +132,7 @@ export const Footer = () => {
 
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     Refund Policy
                   </a>
@@ -142,14 +142,14 @@ export const Footer = () => {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="font-medium text-gray-900 dark:text-white">
+              <p className="font-medium text-white">
                 Downloads
               </p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     Marketing Calendar
                   </a>
@@ -157,7 +157,7 @@ export const Footer = () => {
 
                 <li>
                   <a
-                    className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                    className="cursor-pointer transition hover:opacity-75 text-gray-200"
                   >
                     SEO Infographics
                   </a>
@@ -169,7 +169,7 @@ export const Footer = () => {
               <li>
                 <a
                   rel="noreferrer"
-                  className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                  className="cursor-pointer transition hover:opacity-75 text-gray-200"
                 >
                   <span className="sr-only">Facebook</span>
 
@@ -191,7 +191,7 @@ export const Footer = () => {
               <li>
                 <a
                   rel="noreferrer"
-                  className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                  className="cursor-pointer transition hover:opacity-75 text-gray-200"
                 >
                   <span className="sr-only">Instagram</span>
 
@@ -215,7 +215,7 @@ export const Footer = () => {
                   href="https://twitter.com/kshitijtodkar48"
                   target="_blank"
                   rel="noreferrer"
-                  className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                  className="cursor-pointer transition hover:opacity-75 text-gray-200"
                 >
                   <span className="sr-only">Twitter</span>
 
@@ -235,7 +235,7 @@ export const Footer = () => {
                   href="https://github.com/KshitijTodkar48/T-Fashionista"
                   target="_blank"
                   rel="noreferrer"
-                  className="cursor-pointer text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                  className="cursor-pointer transition hover:opacity-75 text-gray-200"
                 >
                   <span className="sr-only">GitHub</span>
 
@@ -257,16 +257,16 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-gray-100 pt-8 dark:border-gray-800">
+        <div className="mt-8 border-t pt-8 border-gray-800">
           <div className="sm:flex sm:justify-between">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-gray-400">
               &copy; 2023. T-Fashionista. All rights reserved.
             </p>
 
             <a 
               href="https://www.linkedin.com/in/kshitij-todkar-95b59b267"
               target="_blank"
-              className="cursor-pointer text-sm text-gray-500 transition hover:opacity-75 dark:text-gray-400"
+              className="cursor-pointer text-sm transition hover:opacity-75 text-gray-400"
             >
                Designed & Developed by - Kshitij Todkar
             </a>
@@ -274,7 +274,7 @@ export const Footer = () => {
             <ul className="mt-8 flex flex-wrap justify-start gap-4 text-sm sm:mt-0 lg:justify-end">
               <li>
                 <a
-                  className="cursor-pointer text-gray-500 transition hover:opacity-75 dark:text-gray-400"
+                  className="cursor-pointer transition hover:opacity-75 text-gray-400"
                 >
                   Terms & Conditions
                 </a>
@@ -282,7 +282,7 @@ export const Footer = () => {
 
               <li>
                 <a
-                  className="cursor-pointer text-gray-500 transition hover:opacity-75 dark:text-gray-400"
+                  className="cursor-pointer transition hover:opacity-75 text-gray-400"
                 >
                   Privacy Policy
                 </a>
@@ -290,7 +290,7 @@ export const Footer = () => {
 
               <li>
                 <a
-                  className="cursor-pointer text-gray-500 transition hover:opacity-75 dark:text-gray-400"
+                  className="cursor-pointer transition hover:opacity-75 text-gray-400"
                 >
                   Cookies
                 </a>

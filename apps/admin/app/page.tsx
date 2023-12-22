@@ -27,8 +27,8 @@ export default function Page() {
           adminId ? 
           <>
             <div className="mt-[85px] font-bold flex flex-col items-center gap-4">
-              <h1 className="text-4xl font-bold px-5">
-                Welcome to <span className="text-orange-500"> T-Fashonista </span>'s Seller Dashboard 
+              <h1 className="text-3xl flex flex-col sm:block font-bold px-5">
+                <span> Welcome to </span> <span> <span className="text-orange-500"> T-Fashonista </span>'s </span> <span> Seller Dashboard </span>
               </h1>
               <Dashboard />
             </div>

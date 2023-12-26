@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Provider from "@/context/Provider";

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import NextAuth from "next-auth/next";
 import { authOptions } from "@/utils/auth";
 

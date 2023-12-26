@@ -29,7 +29,7 @@ export const Blackbutton = ({ name, route }: ButtonProps) => {
   }
   return (
     <button
-      className="flex items-center gap-3 text-base lg:text-lg px-5 py-1 border rounded-full bg-black text-white font-[500] hover:border-2 hover:border-black hover:bg-white hover:text-black"
+      className="flex items-center gap-3 text-base lg:text-lg px-5 py-1 border-2 rounded-full bg-black text-white font-[500] hover:border-2 hover:border-black hover:bg-white hover:text-black"
       onClick={handleClick}
     >
       { name }

@@ -1,6 +1,6 @@
 export const AdminHero = () => {
   return (
-    <div className="flex flex-col items-center m-4">
+    <div className="flex flex-col items-center m-4 mb-8">
         <h1 className="text-3xl md:text-4xl font-bold px-2">
           Welcome to <span className="text-orange-500"> <br className="sm:hidden"/> T-Fashonista </span>'s <br className="sm:hidden"/>
           Seller Dashboard

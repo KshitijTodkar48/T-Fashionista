@@ -36,7 +36,12 @@ export const PublishedProducts = ({ Id }:{ Id: string | undefined }) => {
 
     return(
         <section className="my-4">
-          <div className="text-3xl font-semibold ml-5 mt-2">My Products</div>
+          {
+            (products.length === 0) ? 
+            <div className="text-2xl font-semibold ml-5 mt-3 text-gray-500">You have no products published.</div>
+            :
+            <div className="text-3xl font-semibold ml-5 mt-2">My Products</div>
+          }
           <section className="gap-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
            { products.map((product) => <div key={product.id}> <AdminProductCard {...product}/> </div>)}
           </section>

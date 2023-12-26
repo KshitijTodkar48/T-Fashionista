@@ -31,7 +31,7 @@ export const LoginCard = ({ page , route }: LoginCardProps) => {
             return;
           }
           const toastId1 = toast.loading("Signing up..") ;
-          const response = await fetch(`/api/${route}/signup`,{
+          const response = await fetch(`/api/signup`,{
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -105,7 +105,7 @@ export const LoginCard = ({ page , route }: LoginCardProps) => {
                 </div>
                 <div className="flex flex-col gap-5 w-full text-base">
                   {
-                    pathname === "/users/signup" && (
+                    pathname === `/${route}/signup` && (
                       <input 
                         type="text"
                         placeholder="Full Name"
@@ -145,12 +145,12 @@ export const LoginCard = ({ page , route }: LoginCardProps) => {
                 </button>
                 <div className="text-sm hover:underline hover:underline-offset-2">
                   {
-                    pathname === "/users/login" ?
+                    pathname === `/${route}/login` ?
                     <>
-                      <Link href={"/users/signup"}> Don't have an account? (Signup) </Link>
+                      <Link href={`/${route}/signup`}> Don't have an account? (Signup) </Link>
                     </> : 
                     <>
-                      <Link href={"/users/login"}> Already have an account? (Login) </Link>
+                      <Link href={`/${route}/login`}> Already have an account? (Login) </Link>
                     </>
                   }
                 </div>

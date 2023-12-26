@@ -1,7 +1,7 @@
 "use client";
 import { Logo, SmallLogo, LogoutIcon, MyAccountIcon, OrdersIcon, ProfileIcon } from "../assets";
 import { Blackbutton } from "./Blackbutton";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";

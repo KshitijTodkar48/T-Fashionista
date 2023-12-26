@@ -1,9 +1,9 @@
 export const Footer = () => {
   return (
     <footer className="bg-gray-900" id="Footer">
-      <div className="mx-auto max-w-screen-xl px-4 pt-[6rem] pb-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-screen-xl px-4 pt-[96px] pb-[88px] sm:px-6 lg:px-8">
         <div className="lg:flex lg:items-start lg:gap-8">
-          <div className="text-orange-400">
+          <div className="text-orange-500">
             <svg
               className="h-8"
               viewBox="0 0 28 24"

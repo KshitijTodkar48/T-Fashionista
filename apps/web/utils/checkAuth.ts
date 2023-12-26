@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { tokenName } from "./constants";
 
 export const checkAuthorization = async(req: NextRequest): Promise<NextResponse> => {
-    const sessionToken = req.cookies.get("next-auth.session-token");
+    const sessionToken = req.cookies.get(tokenName);
     if (sessionToken) {
         return NextResponse.next();
     }

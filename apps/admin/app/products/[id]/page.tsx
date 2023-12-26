@@ -19,24 +19,6 @@ const ProductDetails = ({ params }) => {
 
   const { data: session, status } = useSession();
   
-  if (status === "loading") {
-    return (
-      <section className="h-[92vh] flex justify-center">
-        <Loader/>
-      </section>
-    );
-  }
-
-  if(status === "unauthenticated") {
-    return (
-      <section className="h-[92vh] flex justify-center items-center">
-        <div className="text-3xl font-bold text-gray-400">
-          401 - Unauthorized
-        </div>
-      </section>
-    )
-  }
-
   // @ts-ignore
   const userId = session?.user?.id;
 
@@ -57,6 +39,24 @@ const ProductDetails = ({ params }) => {
     };
     if(userId) fetchProductDetails();
   }, [userId]);
+
+  if (status === "loading") {
+    return (
+      <section className="h-[92vh] flex justify-center">
+        <Loader/>
+      </section>
+    );
+  }
+
+  if(status === "unauthenticated") {
+    return (
+      <section className="h-[92vh] flex justify-center items-center">
+        <div className="text-3xl font-bold text-gray-400">
+          401 - Unauthorized
+        </div>
+      </section>
+    )
+  }
 
   const updateDetails = async () => {
     // Check if required fields are not empty.

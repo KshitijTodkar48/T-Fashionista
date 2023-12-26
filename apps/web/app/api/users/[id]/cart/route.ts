@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";

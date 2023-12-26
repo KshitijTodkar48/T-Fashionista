@@ -1,6 +1,6 @@
 "use client";
 import "ui/styles.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
 import { Loader } from "ui";
@@ -14,30 +14,28 @@ const AddProductPage = () => {
   const [imageURL, setImageURL] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [published, setPublished] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
-  const [hasCheckedAuthorization, setHasCheckedAuthorization] = useState<boolean>(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return (
+      <section className="h-[92vh] flex justify-center">
+        <Loader/>
+      </section>
+    );
+  }
+
+  if(status === "unauthenticated") {
+    return (
+      <section className="h-[92vh] flex justify-center items-center">
+        <div className="text-3xl font-bold text-gray-400">
+          401 - Unauthorized
+        </div>
+      </section>
+    )
+  }
+
   // @ts-ignore
   const userId = session?.user?.id;
-
-  useEffect(() => {
-    if(userId)
-    {
-        setIsLoading(false);
-        setIsAuthorized(true);
-    }
-    else{
-        // If userId is not available after some time, show 401 Unauthorized.
-      setTimeout(() => {
-        if (!userId && !hasCheckedAuthorization) {
-          setIsLoading(false);
-          setIsAuthorized(false);
-          setHasCheckedAuthorization(true);
-        }
-      }, 5000); 
-    }
-  }, [userId, hasCheckedAuthorization]);
 
   const addProduct = async () => {
     if (!userId) return ;
@@ -69,23 +67,6 @@ const AddProductPage = () => {
       toast.error("Network error.");
     }
   };
-
-  if(isLoading)
-  {
-    return <section className="h-[100vh] flex justify-center items-center">
-        <Loader />
-    </section>
-  }
-
-  if(!isAuthorized)
-  {
-    return <section className="h-[100vh] flex justify-center items-center">
-        <div className="flex flex-col gap-2 items-center">
-            <div className="text-4xl font-bold text-gray-400"> 401 </div>
-            <div className="text-3xl font-bold text-gray-400"> Unauthorized </div>
-        </div>
-    </section>
-  }
 
   return (
     <section className="w-full flex justify-center lg:mt-20">

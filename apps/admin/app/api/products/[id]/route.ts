@@ -1,9 +1,19 @@
 import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 import { productDetailsSchema } from "zod-schemas";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/auth";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const GET = async(req: NextRequest , { params }): Promise<NextResponse> => {
+    // @ts-ignore
+    const adminSession = await getServerSession(authOptions);
+
+    if(!adminSession)
+    {
+        return new NextResponse("Unauthorized.", { status: 401 });
+    }
+    
     const productId = parseInt(params.id);
     try { 
         const product = await prisma.product.findUnique({
@@ -31,16 +41,25 @@ export const GET = async(req: NextRequest , { params }): Promise<NextResponse> =
 }
 
 export const PATCH = async(req: NextRequest, { params }) => {
-    const productId = parseInt(params.id);
-    const body = await req.json();
-    
-    // Zod input-validation
-    const validatedData = productDetailsSchema.safeParse(body);
-    if(!validatedData.success)
+    // @ts-ignore
+    const adminSession = await getServerSession(authOptions);
+
+    if(!adminSession)
     {
-        return new NextResponse("Invalid data format" , { status: 400 });;
+        return new NextResponse("Unauthorized.", { status: 401 });
     }
-    try { 
+
+    try {
+        const productId = parseInt(params.id);
+        const body = await req.json();
+        
+        // Zod input-validation
+        const validatedData = productDetailsSchema.safeParse(body);
+        if(!validatedData.success)
+        {
+            return new NextResponse("Invalid data format" , { status: 400 });;
+        }
+
         const product = await prisma.product.findUnique({
             where: {
                 id: productId
@@ -68,8 +87,7 @@ export const PATCH = async(req: NextRequest, { params }) => {
         return NextResponse.json(updatedProduct);
 
     } catch (error) {
-
+        console.log(error);
         return new NextResponse("An error occured.", { status: 500 });
-
     }
 }

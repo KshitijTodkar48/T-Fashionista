@@ -13,7 +13,7 @@ export default function Page() {
  
   if (status === "loading") {
     return (
-      <section className="h-[85vh] flex justify-center">
+      <section className="h-[92vh] flex justify-center">
         <Loader/>
       </section>
     );

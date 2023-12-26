@@ -33,14 +33,14 @@ const MyOrders = () => {
     if(isLoading)
     {
        return(
-        <div className="h-[500px] flex items-center"> 
+        <div className="h-[90vh] flex items-center"> 
           <Loader /> 
         </div>
        )
     }  
     return(
         <section className="flex flex-col items-center">
-            <h1 className="text-red-500 font-bold text-4xl sm:text-5xl text-center m-4">
+            <h1 className="text-orange-600 font-bold text-4xl sm:text-5xl text-center m-4">
                 My Orders
             </h1>
             <div className="flex flex-col gap-6 w-full items-center mb-10">

@@ -1,9 +1,19 @@
 import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 import { productDetailsSchema } from "zod-schemas";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/auth";
 
 export const POST = async(req: NextRequest, { params }): Promise<NextResponse> =>
 {
+    // @ts-ignore
+    const adminSession = await getServerSession(authOptions);
+
+    if(!adminSession)
+    {
+        return new NextResponse("Unauthorized.", { status: 401 });
+    }
+    
     try {
         const adminId = params.id;
         const body = await req.json();

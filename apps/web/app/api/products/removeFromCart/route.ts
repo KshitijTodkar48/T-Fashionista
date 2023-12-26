@@ -1,7 +1,18 @@
 import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/auth";
 
 export const POST = async(request:NextRequest) => {
+
+    // @ts-ignore
+    const userSession = await getServerSession(authOptions);
+
+    if(!userSession)
+    {
+        return new NextResponse("Unauthorized.", { status: 401 });
+    }
+    
     const body = await request.json();
     const { userId, productId } = body;
     try{

@@ -3,7 +3,7 @@ import "ui/styles.css";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
-import { ImageSkeleton, OrderedByCard } from "ui";
+import { ImageSkeleton, Loader, OrderedByCard } from "ui";
 import { Input, Form, Switch } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { productDetailsSchema } from "zod-schemas";
@@ -16,7 +16,27 @@ const ProductDetails = ({ params }) => {
   const [published, setPublished] = useState<boolean>(false);
   const [buyers, setBuyers] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { data: session } = useSession();
+
+  const { data: session, status } = useSession();
+  
+  if (status === "loading") {
+    return (
+      <section className="h-[92vh] flex justify-center">
+        <Loader/>
+      </section>
+    );
+  }
+
+  if(status === "unauthenticated") {
+    return (
+      <section className="h-[92vh] flex justify-center items-center">
+        <div className="text-3xl font-bold text-gray-400">
+          401 - Unauthorized
+        </div>
+      </section>
+    )
+  }
+
   // @ts-ignore
   const userId = session?.user?.id;
 
@@ -35,7 +55,7 @@ const ProductDetails = ({ params }) => {
       }
       setIsLoading(false);
     };
-    fetchProductDetails();
+    if(userId) fetchProductDetails();
   }, [userId]);
 
   const updateDetails = async () => {

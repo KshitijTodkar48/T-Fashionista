@@ -79,7 +79,7 @@ const Cart = () => {
     if(isLoading)
     {
        return(
-        <div className="h-[500px] flex items-center"> 
+        <div className="h-[90vh] flex items-center"> 
           <Loader /> 
         </div>
        )

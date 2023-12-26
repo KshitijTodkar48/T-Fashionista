@@ -11,7 +11,7 @@ export const Products = ({ userId }:{ userId: string | undefined}) => {
     useEffect(() => { ;
         const fetchProducts = async() => {
           try {
-           const response = await fetch("/api/products") ;
+           const response = await fetch("/api/products", { next: { revalidate: 10 } }) ;
            const data = await response.json() ;
            setProducts(data) ;
            setIsLoading(false) ;

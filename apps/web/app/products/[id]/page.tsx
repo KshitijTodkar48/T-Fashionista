@@ -32,7 +32,7 @@ const ProductDetails = ({ params }) => {
                     const productState = localStorage.getItem(`is${params?.id}Addedfor-${userId}`) ;
                     if (productState) setIsAddedToCart(true) ;
                 }
-                const response = await fetch(`/api/products/${params?.id}`);
+                const response = await fetch(`/api/products/${params?.id}`, { next: { revalidate: 10 } });
                 const data = await response.json();
                 setProduct(data);
                 setIsLoading(false);

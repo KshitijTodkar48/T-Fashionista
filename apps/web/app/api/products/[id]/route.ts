@@ -1,6 +1,7 @@
 import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
 
+export const revalidate = 0;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const GET = async(req: NextRequest , { params }): Promise<NextResponse> => {
     const productId = parseInt(params.id);

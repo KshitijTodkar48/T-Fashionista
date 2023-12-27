@@ -42,8 +42,13 @@ export const LoginCard = ({ page , route }: LoginCardProps) => {
             toast.dismiss(toastId1);
             if (response.ok) {
               toast.success("Signed Up successfully !");
-              await new Promise((res):any => setTimeout(res,1200));
-              router.push(`/${route}/login`);
+              await signIn("credentials", {
+                email,
+                password,
+                redirect:false,
+              })
+              await new Promise((res):any => setTimeout(res,800));
+              router.back();
             } else {
               if(route === "users")
                 toast.error("User with this email already exists.");
@@ -77,7 +82,7 @@ export const LoginCard = ({ page , route }: LoginCardProps) => {
             if(response?.ok) {
               toast.success("Logged in successfully !");
               await new Promise((res):any => setTimeout(res,1200));
-              router.push("/");
+              router.back();
             }
             else{
               if(response?.status === 401)

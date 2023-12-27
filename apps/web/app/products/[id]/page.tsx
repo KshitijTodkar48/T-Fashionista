@@ -2,11 +2,12 @@
 import "ui/styles.css";
 import { useState, useEffect } from "react";
 import { ProductType } from "types";
-import { OrangeButtonLarge, StarIconLarge } from "ui";
+import { Logo, OrangeButtonLarge, SmallLogo, StarIconLarge } from "ui";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { ImageSkeleton } from "ui";
+import { Blackbutton } from "ui/components/Blackbutton";
 
 const ProductDetails = ({ params }) => {
     const [product , setProduct] = useState<ProductType | null>(null);
@@ -15,9 +16,10 @@ const ProductDetails = ({ params }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true) ;
     const notify = () => toast.success("Item added to Cart.");
     const router = useRouter();
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     // @ts-ignore
     const userId = session?.user?.id;
+    const userEmail = session?.user?.email;
     const handleSizeChange = (e) => {
       setSelectedSize(e.target.value);
     };
@@ -71,13 +73,29 @@ const ProductDetails = ({ params }) => {
 
     return(
         <section className="w-full flex justify-center">
-            <section className="flex flex-col lg:flex-row w-full justify-center items-center p-5 my-8 max-w-[1530px]">
+            <section className="w-full fixed top-0 bg-white flex items-center py-2">
+              <div className="sm:hidden"> <SmallLogo /> </div>
+              <div className="max-sm:hidden"> <Logo width={210} height={50} /> </div>
+              {!(status === "loading") && 
+                (<div className="flex fixed right-0 items-center justify-end gap-2 mr-[1rem]">
+                {session?.user ? (
+                   <Blackbutton name="Go to Cart" route={"users"}/>
+                  ) : (
+                  <>
+                    <div className="h-10"><Blackbutton name="Login" route={"users"} /></div>
+                    <div className="h-10"><Blackbutton name="Signup" route={"users"} /></div>
+                  </>
+                )}
+              </div>)
+            }
+            </section>
+            <section className="flex flex-col lg:flex-row w-full justify-center items-center pr-10 pl-5 pb-5 max-sm:px-2 mt-16 max-w-[1530px]">
                 {
                   isLoading ? 
                   <div className="w-4/5 md:w-[35%] flex justify-center mb-8">
                     <ImageSkeleton />
                   </div> :
-                  <div className="w-4/5 md:w-1/2 flex justify-center mb-8">
+                  <div className="w-4/5 md:w-1/2 flex justify-center my-8 max-lg:my-4">
                     <img src={product?.imageURL} alt="" className="rounded-2xl w-[90%] max-h-[600px]" />
                   </div>
                 }

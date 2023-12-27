@@ -15,7 +15,6 @@ export const Navbar = ({ Id, Email, route }: { Id: string | undefined, Email: st
     await signOut({
       redirect: false,
     });
-    router.push('/');
     window.location.reload();
   };
 

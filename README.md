@@ -1,81 +1,118 @@
-# Turborepo starter
+## Intoduction
 
-This is an official starter Turborepo.
+T-Fashionista is a full-stack e-commerce web application tailored for T-shirt enthusiasts. Leveraging a robust tech stack, this project showcases modern web development at its finest.
 
-## Using this example
+## Tech-Stack
 
-Run the following command:
+- [Next.js](https://nextjs.org/) – framework
+- [TypeScript](https://www.typescriptlang.org/) – language
+- [NextAuth.js](https://next-auth.js.org/) – auth
+- [Prisma](https://www.prisma.io/) - ORM
+- [PostgreSQL](https://www.postgresql.org/) – database
+- [Tailwind](https://tailwindcss.com/) – CSS
+- [Turborepo](https://turbo.build/repo) – monorepo
+- [Vercel](https://vercel.com/) – deployments
 
-```sh
-npx create-turbo@latest
-```
+## Getting Started
 
-## What's inside?
+To get a local copy up and running, please follow these simple steps.
 
-This Turborepo includes the following packages/apps:
+### Prerequisites
 
-### Apps and Packages
+Here is what you need to be able to run T-Fashionista.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- Node.js (Version: >=18.x)
+- PostgreSQL
+- Yarn _(recommended)_
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Development
 
-### Utilities
+### Setup
 
-This Turborepo has some additional tools already setup for you:
+1. Clone the repo into a public GitHub repository (or fork https://github.com/KshitijTodkar48/T-Fashionista/fork).
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+   ```sh
+   git clone https://github.com/KshitijTodkar48/T-Fashionista.git
+   ```
 
-### Build
+   
+2. Go to the project folder
 
-To build all apps and packages, run the following command:
+   ```sh
+   cd t-fashionista
+   ```
 
-```
-cd my-turborepo
-pnpm build
-```
 
-### Develop
+3. Install packages with yarn
 
-To develop all apps and packages, run the following command:
+   ```sh
+   yarn install
+   ```
 
-```
-cd my-turborepo
-pnpm dev
-```
+   
+4. Set up your `.env` file.
 
-### Remote Caching
+   Create a new file named `.env` in the root directory.
+   
+   You need to setup 2 environment variables: 1) NEXTAUTH_SECRET, 2) DATABASE_URL
+   
+   - Copy `.env.example` to `.env` by running the following command.
+     
+     ```sh
+     cp .env.example .env
+     ```
+     
+   - Use `openssl rand -base64 32` to generate a key and add it under `NEXTAUTH_SECRET` in the `.env` file.
+   - You will need you own postgresql cloud database. Put its link (eg.- `postgresql://<user>:<pass>@<db-host>:<db-port>`) under `DATABASE_URL` in the `.env` file.
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+6. Setup Node
+   If your Node version does not meet the project's requirements as instructed, "nvm" (Node Version Manager) allows using Node at the version required by the project.
+   
+   You first might need to install the specific version and then use it:
 
-```
-cd my-turborepo
-npx turbo login
-```
+   ```sh
+   nvm install && nvm use
+   ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+   You can install nvm from [here](https://github.com/nvm-sh/nvm).
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
 
-```
-npx turbo link
-```
+7. Set up the database using the Prisma schema.
 
-## Useful Links
+    ```sh
+     cd packages/database
+    ```
+   And run the following commands:
+    
+    ```sh
+     yarn run db:generate
+    ```
+    
+    ```sh
+     yarn run db:push
+    ```
 
-Learn more about the power of Turborepo:
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+ 8. Start both the admin and web applications.
+
+    Go back to root directory (from `t-fashionista/packages/database` to `t-fashionista`)
+
+    ```sh
+     cd ../..
+    ```
+
+    And run the following command:
+
+    ```sh
+     yarn dev
+    ```
+
+
+ 9. Open the applications running locally:
+
+    Web app on: http://localhost:3000
+    
+    Admin app on: http://localhost:3001
+
+

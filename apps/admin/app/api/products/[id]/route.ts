@@ -87,7 +87,8 @@ export const PATCH = async(req: NextRequest, { params }) => {
         return NextResponse.json(updatedProduct);
 
     } catch (error) {
-        console.log(error);
+
         return new NextResponse("An error occured.", { status: 500 });
+        
     }
 }

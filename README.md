@@ -1,17 +1,17 @@
-## Intoduction
+## Introduction
 
 T-Fashionista is a full-stack e-commerce web application tailored for T-shirt enthusiasts. Leveraging a robust tech stack, this project showcases modern web development at its finest.
 
 ## Tech-Stack
 
-- [Next.js](https://nextjs.org/) – framework
-- [TypeScript](https://www.typescriptlang.org/) – language
-- [NextAuth.js](https://next-auth.js.org/) – auth
+- [Next.js](https://nextjs.org/) – React framework
+- [TypeScript](https://www.typescriptlang.org/) – Language
+- [NextAuth.js](https://next-auth.js.org/) – Authentication library
 - [Prisma](https://www.prisma.io/) - ORM
-- [PostgreSQL](https://www.postgresql.org/) – database
-- [Tailwind](https://tailwindcss.com/) – CSS
-- [Turborepo](https://turbo.build/repo) – monorepo
-- [Vercel](https://vercel.com/) – deployments
+- [PostgreSQL](https://www.postgresql.org/) – Database
+- [Tailwind](https://tailwindcss.com/) – CSS framework
+- [Turborepo](https://turbo.build/repo) – Monorepo
+- [Vercel](https://vercel.com/) – Deployments
 
 ## Getting Started
 

@@ -1,7 +1,18 @@
 import { prisma } from "database";
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/auth";
 
 export const POST = async(req: NextRequest, { params }): Promise<NextResponse> => {
+
+    // @ts-ignore
+    const userSession = await getServerSession(authOptions);
+
+    if(!userSession)
+    {
+        return new NextResponse("Unauthorized.", { status: 401 });
+    }
+
     const userId = params.id;
     const body = await req.json();
     const orderedItemsIds = body.cartItemsIds; // Array of ID's of ordered products.

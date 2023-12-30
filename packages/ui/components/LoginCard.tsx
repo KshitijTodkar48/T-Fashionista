@@ -66,7 +66,7 @@ export const LoginCard = ({ page , route }: LoginCardProps) => {
           const validatedData = loginFormSchema.safeParse({ email, password });
           if(!validatedData.success)
           {
-            toast("Enter a valid email.", {
+            toast("Enter a valid email and password.", {
               icon: '❗'
             })
             return;

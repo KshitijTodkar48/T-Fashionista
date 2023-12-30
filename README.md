@@ -50,19 +50,16 @@ Here is what you need to be able to run T-Fashionista.
    ```
 
    
-4. Set up your `.env` file.
+4. Set up your `.env` variables.
 
-   Create a new file named `.env` in the root directory.
+   Create a new file named `.env`, one in `t-fashionista/apps/admin` directory and another in `t-fashionista/apps/web` directory.
+
+   In both the `.env` files, add a variable named `NEXTAUTH_SECRET`.
+
+   - Use `openssl rand -base64 32` to generate a random string and set it as the value of `NEXTAUTH_SECRET`.
    
-   You need to setup 2 environment variables: 1) NEXTAUTH_SECRET, 2) DATABASE_URL
+   Create another `.env` file in `t-fashionista/packages/database` directory and add a variable named `DATABASE_URL` in it.
    
-   - Copy `.env.example` to `.env` by running the following command.
-     
-     ```sh
-     cp .env.example .env
-     ```
-     
-   - Use `openssl rand -base64 32` to generate a key and add it under `NEXTAUTH_SECRET` in the `.env` file.
    - You will need you own postgresql cloud database. Put its link (eg.- `postgresql://<user>:<pass>@<db-host>:<db-port>`) under `DATABASE_URL` in the `.env` file.
 
 
@@ -96,7 +93,7 @@ Here is what you need to be able to run T-Fashionista.
 
  8. Start both the admin and web applications.
 
-    Go back to root directory (from `t-fashionista/packages/database` to `t-fashionista`)
+    Go back to root directory (from `t-fashionista/packages/database` to `t-fashionista`) by running:
 
     ```sh
      cd ../..

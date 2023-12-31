@@ -1,8 +1,8 @@
-## Introduction
+## ⭐ Introduction
+ T-Fashionista is a full-stack e-commerce web application tailored for T-shirt enthusiasts. Leveraging a robust tech stack, this project showcases modern web development at its finest.
 
-T-Fashionista is a full-stack e-commerce web application tailored for T-shirt enthusiasts. Leveraging a robust tech stack, this project showcases modern web development at its finest.
-
-## Tech-Stack
+## 🔧 Tech-Stack 
+<img src='https://skillicons.dev/icons?i=nextjs,typescript,tailwind,prisma,postgresql,vercel'/>
 
 - [Next.js](https://nextjs.org/) – React framework
 - [TypeScript](https://www.typescriptlang.org/) – Language
@@ -13,11 +13,11 @@ T-Fashionista is a full-stack e-commerce web application tailored for T-shirt en
 - [Turborepo](https://turbo.build/repo) – Monorepo
 - [Vercel](https://vercel.com/) – Deployments
 
-## Getting Started
+## ▶️ Getting Started
 
 To get a local copy up and running, please follow these simple steps.
 
-### Prerequisites
+### 🟡 Prerequisites
 
 Here is what you need to be able to run T-Fashionista.
 
@@ -25,9 +25,9 @@ Here is what you need to be able to run T-Fashionista.
 - PostgreSQL
 - Yarn _(recommended)_
 
-## Development
+## 💻 Development
 
-### Setup
+### 🟢 Setup
 
 1. Clone the repo into a public GitHub repository (or fork https://github.com/KshitijTodkar48/T-Fashionista/fork).
 
@@ -39,7 +39,7 @@ Here is what you need to be able to run T-Fashionista.
 2. Go to the project folder
 
    ```sh
-   cd t-fashionista
+   cd T-Fashionista
    ```
 
 
@@ -52,13 +52,13 @@ Here is what you need to be able to run T-Fashionista.
    
 4. Set up your `.env` variables.
 
-   Create a new file named `.env`, one in `t-fashionista/apps/admin` directory and another in `t-fashionista/apps/web` directory.
+   Create a new file named `.env`, one in `T-Fashionista/apps/admin` directory and another in `T-Fashionista/apps/web` directory.
 
    In both the `.env` files, add a variable named `NEXTAUTH_SECRET`.
 
    - Use `openssl rand -base64 32` to generate a random string and set it as the value of `NEXTAUTH_SECRET`.
    
-   Create another `.env` file in `t-fashionista/packages/database` directory and add a variable named `DATABASE_URL` in it.
+   Create another `.env` file in `T-Fashionista/packages/database` directory and add a variable named `DATABASE_URL` in it.
    
    - You will need you own postgresql cloud database. Put its link (eg.- `postgresql://<user>:<pass>@<db-host>:<db-port>`) under `DATABASE_URL` in the `.env` file.
 
@@ -93,7 +93,7 @@ Here is what you need to be able to run T-Fashionista.
 
  8. Start both the admin and web applications.
 
-    Go back to root directory (from `t-fashionista/packages/database` to `t-fashionista`) by running:
+    Go back to root directory (from `T-Fashionista/packages/database` to `T-Fashionista`) by running:
 
     ```sh
      cd ../..
